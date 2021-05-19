@@ -1,0 +1,25 @@
+<h1>Edit task</h1>
+
+<%= form_with scope: :task, model: @task, local: true do |form| %>
+    <div>
+        <% if @task.errors.any? %>
+            <ul>
+                <% @task.errors.each do |e| %>
+                    <li><%= e.full_message %></li>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
+    
+    <div class="form-group">
+        <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+    </div>
+    <div class="form-group">
+        <p><%= form.date_field :deadline, class: "form-control" %></p>        
+    </div>
+    
+    <%= form.submit class: "btn btn-dark" %>
+<% end %>
