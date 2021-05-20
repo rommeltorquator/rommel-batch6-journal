@@ -15,3 +15,62 @@
  *= require_tree .
  *= require_self
  */
+
+/* https://www.schemecolor.com/old-green-bills.php */
+
+* {
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+body {
+    background-color: #f0efdb;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+.primary-h1 {
+    font-size: 88px;
+    font-weight: 600;
+}
+
+.primary-p {
+    font-weight: 400;
+}
+
+.font-primary {
+    color: #333;
+}
+
+.font-secondary {
+    color: #f0efdb;
+}
+
+.bg-dark {
+    background-color: #4a663d !important;
+}
+
+.main-btn {
+    width: 210px;
+    background-color: #4a663d !important;
+    color: #f3f2e8 !important;
+    border-color: #4a663d;
+    box-shadow: 2px 2px 5px #999;
+    border-radius: 1000px;
+}
+
+.main-btn:hover {
+    background-color: #2e4723 !important;
+    border-color: #2e4723 !important;
+}
