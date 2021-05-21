@@ -3,7 +3,7 @@
 <% @categories.each do |category| %>
     <hr/>
     <p>user: <%= category.user.email %></p>
-    <p><%= category.id %></p>
+    <h1>CATEGORY ID<%= category.id %></h1>
     <p><%= category.title %></p>
     <p><%= category.description %></p>
 
@@ -11,14 +11,15 @@
     <%= link_to 'Edit', edit_category_path(category) %> |
     <%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %>
 
-    <div class="bg-primary">
+    <div>
         <h3>Tasks</h3>
         <% category.tasks.each do |task| %>
             <h1><%= task.id %></h1>
             <h1><%= task.title %></h1>
             <h1><%= task.description %></h1>
             <h1><%= task.deadline %></h1>
-        <% end %>        
+            <%= button_to 'Delete task', task, params: {category_id: category.id}, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
     </div>
 
     <%= form_with scope: :task, model: [ category.tasks.build ], local: true do |form| %>
