@@ -1,15 +1,15 @@
-class TasksController < ApplicationController
-  def index
-    @tasks = Task.all.order(id: :desc)
-  end
+# class TasksController < ApplicationController
+#   def index
+#     @tasks = Task.all.order(id: :desc)
+#   end
 
-  def show
-    @task = Task.find(params[:id])
-  end
+#   def show
+#     @task = Task.find(params[:id])
+#   end
 
-  def new
-    @task = Task.new
-  end
+#   def new
+#     @task = Task.new
+#   end
 
   def create
     @task = Task.new(task_params)
@@ -21,16 +21,16 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-    @task = Task.find(params[:id])
-  end
+  # def edit
+  #   @task = Task.find(params[:id])
+  # end
 
-  def update
-    @task = Task.find(params[:id])
+  # def update
+  #   @task = Task.find(params[:id])
 
-    @task.update(task_params)
-    redirect_to task_path(@task)
-  end
+  #   @task.update(task_params)
+  #   redirect_to task_path(@task)
+  # end
 
   def destroy
     @task = Task.find(params[:id])
