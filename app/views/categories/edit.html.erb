@@ -1,4 +1,4 @@
-<h1 class="text-center">Edit a post</h1>
+<h1 class="text-center mt-5">Edit a post</h1>
 
 <%= form_with model: @category do |form| %>
     <div>
@@ -13,3 +13,5 @@
 
     <%= form.submit %>
 <% end %>
+
+<%= link_to "go back", @category %>

@@ -1,19 +1,5 @@
-<% content_for :title do %>
-    <title>Create a task</title>
-<% end %>
-
-<h1>Create task</h1>
-
-<%= form_with scope: :task, model: @task, local: true do |form| %>
-    <div>
-        <% if @task.errors.any? %>
-            <ul>
-                <% @task.errors.each do |e| %>
-                    <li><%= e.full_message %></li>
-                <% end %>
-            </ul>
-        <% end %>
-    </div>
+<%= form_with scope: :task, model: @task , local: true do |form| %>
+    <%= hidden_field_tag :category_id, 6 %>
     
     <div class="form-group">
         <%= form.text_field :title, placeholder: "Title", class: "form-control" %>

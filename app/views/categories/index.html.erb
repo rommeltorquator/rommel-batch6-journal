@@ -1,11 +1,38 @@
-<h1 class="text-center">Categories#index</h1>
-<p class="text-center">Find me in app/views/categories/index.html.erb</p>
+<h1 class="text-center mt-5">Categories#index <%= current_user.email %></h1>
 
 <% @categories.each do |category| %>
     <hr/>
     <p>user: <%= category.user.email %></p>
     <p><%= category.id %></p>
     <p><%= category.title %></p>
-    <p><%= category.description %></p>    
-    <hr/>
+    <p><%= category.description %></p>
+
+    <%= link_to "show post", category %> |
+    <%= link_to 'Edit', edit_category_path(category) %> |
+    <%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <div class="bg-primary">
+        <h3>Tasks</h3>
+        <% category.tasks.each do |task| %>
+            <h1><%= task.id %></h1>
+            <h1><%= task.title %></h1>
+            <h1><%= task.description %></h1>
+            <h1><%= task.deadline %></h1>
+        <% end %>        
+    </div>
+
+    <%= form_with scope: :task, model: [ category.tasks.build ], local: true do |form| %>
+        <%= hidden_field_tag :category_id, category.id %>
+        <div class="form-group">
+            <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+        </div>
+        <div class="form-group">
+            <p><%= form.date_field :deadline, class: "form-control" %></p>
+        </div>
+
+        <%= form.submit class: "btn btn-dark" %>
+    <% end %>
 <% end %>

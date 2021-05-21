@@ -1,9 +1,17 @@
-<h1 class="text-center">Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
-<br/>
-<br/>
-<br/>
+<h1 class="text-center mt-5">Categories#show</h1>
+
 <p><%= @category.user.email %></p>
 <p><%= @category.user_id %></p>
 <p><%= @category.title %></p>
 <p><%= @category.description %></p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to "go back", categories_path %>
+
+<% @category.tasks.each do |task| %>
+    <h1><%= task.id %></h1>
+    <h1><%= task.title %></h1>
+    <h1><%= task.description %></h1>
+    <h1><%= task.deadline %></h1>
+<% end %>
