@@ -6,6 +6,6 @@ one:
   user: one
 
 two:
-  title: MyString
-  description: MyString
+  title: MyString2
+  description: MyString2
   user: two

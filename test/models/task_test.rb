@@ -6,22 +6,34 @@ class TaskTest < ActiveSupport::TestCase
   # end
 
   test "valid task" do
-    task = Task.new(title: "Clean room", description: "Clean your room using vacuum cleaner", deadline: "2021-05-19 13:52:33.691530")
-
-    assert task.valid?
+    assert tasks(:one).valid?
   end
 
   test "invalid without title" do # add presence: true
-    task = Task.new(description: "Clean house")
-    refute task.valid?
-
-    assert_not_nil task.errors[:title]
+    tasks(:one).title = nil
+    refute tasks(:one).valid?
+  
+    assert_not_nil tasks(:one).errors[:title]
   end
 
   test "invalid without description" do # add presence: true
-    task = Task.new(title: "Clean house")
-    refute task.valid?
+    tasks(:one).description = nil
+    refute tasks(:one).valid?
+  
+    assert_not_nil tasks(:one).errors[:description]
+  end
 
-    assert_not_nil task.errors[:description]
+  test "invalid without deadline" do # add presence: true
+    tasks(:one).deadline = nil
+    refute tasks(:one).valid?
+  
+    assert_not_nil tasks(:one).errors[:deadline]
+  end
+
+  test "invalid without category" do # add presence: true
+    tasks(:one).category = nil
+    refute tasks(:one).valid?
+  
+    assert_not_nil tasks(:one).errors[:category]
   end
 end
