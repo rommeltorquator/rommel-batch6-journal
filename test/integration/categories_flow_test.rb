@@ -41,7 +41,20 @@ class CategoriesFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "shows new task under a category" do
+  test "can delete a category and its related tasks" do
+    sign_in users(:one)
+
+    get "/categories/#{categories(:one).id}"
+    assert_response :success
+
+    delete "/categories/#{categories(:one).id}"
+    assert_response :redirect
+
+    follow_redirect!
+    assert_response :success
+  end
+
+  test "can create task under a specific category" do
     sign_in users(:one)
 
     get "/categories/"
