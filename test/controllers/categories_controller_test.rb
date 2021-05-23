@@ -5,6 +5,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "can access categories index when logged in" do # index
     sign_in users(:one)
+    # sign_out users(:one)
 
     get categories_path
     assert_response :success
@@ -63,6 +64,8 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     delete category_path(categories(:one))
     assert_redirected_to categories_path # must redirect to categories index page
   end
+
+  # if user is not logged in
   
   test "must redirect to login page when user is not logged in trying to access categories index" do # index
     get categories_path
