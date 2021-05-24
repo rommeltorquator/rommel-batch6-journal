@@ -40,6 +40,14 @@ h1 {
     font-weight: 700;
 }
 
+.dark-font {
+    color: #333;
+}
+
+.green-font {
+    color: #2e4723;
+}
+
 .primary-h1 {
     font-size: 88px;
     font-weight: 600;
@@ -65,6 +73,10 @@ h1 {
     background-color: #4a663d !important;
 }
 
+.bg-green {
+    background-color: #8ea891;
+}
+
 .main-btn {
     width: 210px;
     background-color: #4a663d !important;
@@ -82,4 +94,16 @@ h1 {
 .row-bg {
     background-color: #fefefe;
     /* border: 3px solid #8ea891; */
+}
+
+.card {
+    border: none !important;
+    background-color: #fefefe !important;
+    min-height: 210px;
+    box-shadow: 1px 3px 5px #666 !important;
+}
+
+.card-text {
+    font-weight: 500;
+    color: #444;
 }

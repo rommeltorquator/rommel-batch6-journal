@@ -3,4 +3,5 @@ class Category < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   validates :title, :description, :user, presence: true
+  validates :title, length: { maximum: 20 }
 end
