@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   # end
 
   def destroy
-    @category = Category.find(params[:category_id])
+    # @category = Category.find(params[:category_id])
     @task = Task.find(params[:id])
 
     @task.destroy

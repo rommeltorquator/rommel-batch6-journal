@@ -30,6 +30,10 @@ class CategoryTest < ActiveSupport::TestCase
   #   assert_not_nil categories(:one).errors[:user]
   # end
 
+  test "valid category" do
+    assert categories(:one).valid?
+  end
+
   test "should not save category without title" do
     category = Category.new(description: "Description", user: users(:one))
     assert_not category.save, 'saved category even without title' # expect it to be false to pass the test
