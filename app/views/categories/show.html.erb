@@ -1,32 +1,36 @@
 <h1 class="text-center mt-5">Categories#show</h1>
 
-<p><%= @category.user.email %></p>
-<h1><%= @category.id %></h1>
-<p><%= @category.title %></p>
-<p><%= @category.description %></p>
+<div class="container">
+    <p><%= @category.user.email %></p>
+    <h1><%= @category.id %></h1>
+    <p><%= @category.title %></p>
+    <p><%= @category.description %></p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to "go back", categories_path %>
+    <%= link_to 'Edit', edit_category_path(@category) %> |
+    <%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to "go back", categories_path %>
 
-<% @category.tasks.each do |task| %>
-    <h1><%= task.id %></h1>
-    <h1><%= task.title %></h1>
-    <h1><%= task.description %></h1>
-    <h1><%= task.deadline %></h1>
-<% end %>
+    <h1>Tasks of <%= @category.title %></h1>
 
-<%= form_with scope: :task, model: [ @category.tasks.build ], local: true do |form| %>
-    <%= hidden_field_tag :category_id, @category.id %>
-    <div class="form-group">
-        <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
-    </div>
-    <div class="form-group">
-        <p><%= form.date_field :deadline, class: "form-control" %></p>
-    </div>
+    <% @category.tasks.each do |task| %>
+        <p><%= task.id %></p>
+        <p><%= task.title %></p>
+        <p><%= task.description %></p>
+        <p><%= task.deadline %></p>
+    <% end %>
 
-    <%= form.submit class: "btn btn-dark" %>
-<% end %>
+    <%= form_with scope: :task, model: [ @category.tasks.build ], local: true do |form| %>
+        <%= hidden_field_tag :category_id, @category.id %>
+        <div class="form-group">
+            <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+        </div>
+        <div class="form-group">
+            <p><%= form.date_field :deadline, class: "form-control" %></p>
+        </div>
+
+        <%= form.submit class: "btn btn-dark" %>
+    <% end %>
+</div>

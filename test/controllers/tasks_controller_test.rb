@@ -25,7 +25,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should see the tasks under a category" do
+  test "should show the tasks under a category" do
     sign_in users(:one)
 
     get categories_path

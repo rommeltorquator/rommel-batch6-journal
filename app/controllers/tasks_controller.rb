@@ -12,10 +12,10 @@ class TasksController < ApplicationController
   # end
 
   def create
-    @category = Category.find(params[:category_id])
-    @task = @category.tasks.create(task_params)
+    category = Category.find(params[:category_id])
+    @task = category.tasks.create(task_params)
 
-    redirect_to categories_path
+    redirect_to category_path(category)
   end
 
   # def edit
