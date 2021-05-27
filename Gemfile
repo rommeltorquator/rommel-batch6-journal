@@ -29,8 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # added by me
-gem 'rexml', '~> 3.2', '>= 3.2.5'
+gem 'rexml', '~> 3.2', '>= 3.2.5' # for testing error
 gem 'devise'
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
