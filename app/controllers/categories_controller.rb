@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(category_params)
 
     if @category.save
-      redirect_to @category
+      redirect_to categories_path
     else
       render :new
     end
@@ -42,6 +42,6 @@ class CategoriesController < ApplicationController
 
   private
   def category_params
-    params.require(:category).permit(:title, :description)
+    params.require(:category).permit(:title)
   end
 end

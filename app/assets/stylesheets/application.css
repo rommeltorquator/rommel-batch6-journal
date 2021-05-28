@@ -100,11 +100,26 @@ h1 {
 .card {
     border: none !important;
     background-color: #fefefe !important;
-    min-height: 210px;
+    min-height: 234px;
     box-shadow: 1px 3px 5px #666 !important;
 }
 
 .card-text {
     font-weight: 500;
     color: #444;
+}
+
+.create-card {
+    border: none !important;
+    background-color: #2e4723 !important;
+    /* border: 5px solid #fefefe !important; */
+    color: #2e4723;
+    min-height: 50px;
+    box-shadow: 1px 3px 5px #666 !important;
+}
+
+.btn-create {
+    color: #f3f3f3;
+    font-size: 23px;
+    font-weight: 500;
 }
