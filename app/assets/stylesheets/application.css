@@ -123,3 +123,71 @@ h1 {
     font-size: 23px;
     font-weight: 500;
 }
+
+.btn-create:hover {
+    color: #f3f3f3;
+}
+
+.show-options {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.table {
+    border: none;
+    background-color: #f3f3f3;
+    box-shadow: 0px 0px 2px #999 !important;
+}
+
+.table th {
+    color: #333 !important;
+    font-weight: 600;
+    font-size: 17px;
+    /* background-color: #8ea891 !important; */
+}
+
+.table td {
+    color: #333 !important;
+}
+
+.table-bordered {
+    border: 1px solid #333 !important;
+}
+
+.table thead {
+    border-bottom: 3px solid #8ea891;
+}
+
+.table tbody tr {
+    border-bottom: .3px solid #d6d5c5;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: none;
+}
+
+.edit-category {
+    padding: 0;
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+th {
+    border: none;
+}
+
+.show-button {
+    color: #333;
+}
+
+.show-button:link, .show-button:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+.show-button:hover, .show-button:active {
+    color: #555;
+    text-decoration: none;
+}
