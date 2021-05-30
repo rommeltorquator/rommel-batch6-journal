@@ -1,12 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @categories = current_user.categories.order(created_at: :desc)
   end
 
-  def show
-    @category = current_user.categories.find(params[:id])
+  def show    
   end
 
   def new
@@ -24,23 +24,23 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = current_user.categories.find(params[:id])
   end
 
   def update
-    @category = current_user.categories.find(params[:id])
-
     @category.update(category_params)
     redirect_to @category
   end
 
   def destroy
-    @category = current_user.categories.find(params[:id])
     @category.destroy
     redirect_to categories_path
   end
 
   private
+  def set_category
+    @category = current_user.categories.find(params[:id])
+  end
+
   def category_params
     params.require(:category).permit(:title)
   end

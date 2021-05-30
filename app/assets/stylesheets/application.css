@@ -20,7 +20,7 @@
 /* https://www.schemecolor.com/old-green-bills.php */
 
 * {
-    font-family: 'Work Sans', sans-serif;
+    font-family: "Work Sans", sans-serif;
     line-height: 1.5;
 }
 
@@ -159,10 +159,11 @@ h1 {
 }
 
 .table tbody tr {
-    border-bottom: .3px solid #d6d5c5;
+    border-bottom: 0.3px solid #d6d5c5;
 }
 
-.table th, .table td {
+.table th,
+.table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: none;
@@ -182,12 +183,14 @@ th {
     color: #333;
 }
 
-.show-button:link, .show-button:visited {
+.show-button:link,
+.show-button:visited {
     color: #333;
     text-decoration: none;
 }
 
-.show-button:hover, .show-button:active {
+.show-button:hover,
+.show-button:active {
     color: #555;
     text-decoration: none;
 }

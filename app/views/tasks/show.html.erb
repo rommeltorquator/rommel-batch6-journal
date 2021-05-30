@@ -1,10 +1,9 @@
 <% content_for :title do %>
-    <title><%= @task.title %></title>
+  <title><%= @task.title %></title>
 <% end %>
 
 <h1><%= @task.title %></h1>
 <p><%= @task.description %></p>
 <p><%= @task.deadline %></p>
-
 
 <%= link_to 'Destroy', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
