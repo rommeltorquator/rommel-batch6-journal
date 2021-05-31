@@ -70,12 +70,20 @@ h1 {
     color: #f0efdb;
 }
 
+.font-green {
+    color: #2e4723;
+}
+
 .bg-dark {
     background-color: #4a663d !important;
 }
 
 .bg-green {
     background-color: #8ea891;
+}
+
+.bg-white {
+    background-color: #dddddd;
 }
 
 .main-btn {
@@ -154,6 +162,10 @@ h1 {
     border: 1px solid #333 !important;
 }
 
+.three-col-heading {
+    color: #333;
+}
+
 .table thead {
     border-bottom: 3px solid #8ea891;
 }
@@ -193,4 +205,24 @@ th {
 .show-button:active {
     color: #555;
     text-decoration: none;
+}
+
+.footer {
+    background-color: #4a663d;
+
+    ul {
+        margin-bottom: 0;        
+        list-style: none;
+
+        li {
+            display: inline-block;
+            margin: 10px;
+            font-weight: 600px;
+
+            a {
+                font-size: 14px;
+                color: #fefefe;
+            }
+        }
+    }
 }
