@@ -1,16 +1,18 @@
-<p class="text-center"><button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable">
+<p class="text-center">
+  <button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable<%= @category.id %>">
     <h1 class="mt-4 display-4 font-weight-bold"><%= @category.id %> <%= @category.title %></h1>
-  </button></p>
+  </button>
+</p>
 
 <p class="text-center">Created: <%= @category.created_at %> | Tasks: <%= @category.tasks.count %> | Completed: <%= @category.tasks.where(status: 'completed').count %></p>
 
-<!-- edit modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<!-- category edit modal -->
+<div class="modal fade" id="exampleModalScrollable<%= @category.id %>" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle<%= @category.id %>" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit <%= @category.title %></h5>
+        <h5 class="modal-title" id="exampleModalScrollableTitle<%= @category.id %>">Edit <%= @category.title %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,7 +33,6 @@
     </div>
   </div>
 </div>
- <!-- modal -->
 <!-- end modal -->
 
 <p class="text-center show-options">
@@ -60,8 +61,55 @@
           <th scope="row"><%= c.title %></th>
           <td><%= c.description %></td>
           <td><%= c.deadline %></td>
-          <td><%= c.status %></td>
-          <td class="px-4"><button type="button" class="btn btn-primary w-100">Edit task</button></td>
+          <td><%= c.status.capitalize() %></td>
+          <td>
+          
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><%= c.id %> Edit task</button>
+            
+            <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" do %>Delete<% end %>
+          
+            <!-- task edit Modal -->
+            <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <%= form_with scope: :task, model: c, local: true do |form| %>
+                      <%= hidden_field_tag :category_id, c.category_id %>
+
+                      <div class="form-group">
+                        <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+                      </div>
+
+                      <div class="form-group">
+                        <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+                      </div>
+
+                      <div class="form-group">
+                        <p><%= form.date_field :deadline, class: "form-control" %></p>
+                      </div>
+
+                      <div class="form-group">
+                        <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
+                      </div>
+
+                      <%= form.submit class: "btn btn-dark" %>
+                    <% end %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end modal -->  
+          </td>
+          
         </tr>
       <% end %>
     </tbody>

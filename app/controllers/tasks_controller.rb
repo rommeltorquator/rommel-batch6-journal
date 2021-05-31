@@ -20,23 +20,26 @@ class TasksController < ApplicationController
     redirect_to categories_path
   end
 
-  def edit    
-  end
-
-  # def update
-  #   @task = Task.find(params[:id])
-
-  #   @task.update(task_params)
-  #   redirect_to task_path(@task)
+  # def edit
   # end
 
+  def update
+    category = Category.find(params[:category_id])
+    @task = category.tasks.find(params[:id]).update(task_params)    
+
+    # @task.update(task_params)
+    # redirect_to task_path(@task)
+    # redirect_to categories_path
+    redirect_to category_path(category)
+  end
+
   def destroy
-    # @category = Category.find(params[:category_id])
+    @category = Category.find(params[:category_id])
     # @task = Task.find(params[:id])
 
     @task.destroy
-    # redirect_to category_path(@category)
-    redirect_to categories_path
+    redirect_to category_path(@category)
+    # redirect_to categories_path
   end
 
   private
