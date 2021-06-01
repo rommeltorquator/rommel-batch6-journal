@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     @task = category.tasks.create(task_params)
 
     # redirect_to category_path(category)
-    redirect_to categories_path
+    redirect_to categories_path, notice: "A task was successfully added."
   end
 
   # def edit
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     # @task.update(task_params)
     # redirect_to task_path(@task)
     # redirect_to categories_path
-    redirect_to category_path(category)
+    redirect_to category_path(category), notice: "A task was successfully updated."
   end
 
   def destroy
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     # @task = Task.find(params[:id])
 
     @task.destroy
-    redirect_to category_path(@category)
+    redirect_to category_path(@category), notice: "A task was successfully deleted."
     # redirect_to categories_path
   end
 

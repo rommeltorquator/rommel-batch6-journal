@@ -1,6 +1,6 @@
 <p class="text-center">
   <button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable<%= @category.id %>">
-    <h1 class="mt-4 display-4 font-weight-bold"><%= @category.id %> <%= @category.title %></h1>
+    <h1 class="mt-4 display-4 font-weight-bold"><%= @category.title %></h1>
   </button>
 </p>
 
@@ -24,11 +24,8 @@
             <%= form.text_field :title, class: "form-control" %>
           </div>
 
-          <%= form.submit %>
+          <%= form.submit class: "btn btn-outline-success w-100" %>
         <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -41,10 +38,10 @@
 </p>
 
 <div class="bg-dark py-3">
-  <h4 class="text-center font-secondary">On-going tasks</h4>
+  <h4 class="text-center font-secondary">Tasks</h4>
 </div>
 
-<div class="container">
+<div class="container mt-4">
   <table class="table table-fixed">
     <thead>
       <tr>
@@ -61,12 +58,12 @@
           <th scope="row"><%= c.title %></th>
           <td><%= c.description %></td>
           <td><%= c.deadline %></td>
-          <td><%= c.status.capitalize() %></td>
+          <th scope="row"><%= c.status.capitalize() %></th>
           <td>
           
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><%= c.id %> Edit task</button>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>">Edit</button>
             
-            <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" do %>Delete<% end %>
+            <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %>Delete<% end %>
           
             <!-- task edit Modal -->
             <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
@@ -98,11 +95,8 @@
                         <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
                       </div>
 
-                      <%= form.submit class: "btn btn-dark" %>
+                      <%= form.submit class: "btn btn-outline-success w-100" %>
                     <% end %>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>

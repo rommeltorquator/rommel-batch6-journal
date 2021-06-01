@@ -4,20 +4,18 @@
   <div class="container">
     <div class="row pb-4">
       <% @categories.each do |category| %>
-        <div class="col-sm-3">
-          <div class="card mt-4">
-            <div class="card-body">
+        <div class="col-sm-3 pt-4">
+          <div class="card">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
               <h4 class="card-title text-center green-font"><%= link_to category.title, category_path(category)  %></h4>
 
               <% if category.tasks.count > 0 %>
-                <p class="card-text text-center">Tasks: <%= category.tasks.count %></p>
-
                 <p class="card-text text-center">Completed tasks: <%= category.tasks.where(status: 'completed').count %> of <%= category.tasks.count %></p>
 
-                <p class="card-text text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">Add a task</button></p>
+                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">Add a task</button></p>
               <% else %>
                 <p class="card-text text-center">No tasks</p>
-                <p class="card-text text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">Add a task</button></p>
+                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">Add a task</button></p>
               <% end %>
 
               <p class="card-text text-center"><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %>Delete<% end %></p>
@@ -56,11 +54,8 @@
                     <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
                   </div>
 
-                  <%= form.submit class: "btn btn-dark" %>
+                  <%= form.submit class: "btn btn-outline-success w-100" %>
                 <% end %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -68,12 +63,8 @@
         <!-- modal -->
       <% end %> <!-- categories loop -->
 
-      <div class="col-sm-3">
-        <div class="card create-card mt-4">
-          <div class="card-body">
-            <p class="card-text text-center"><button type="button" class="btn btn-link btn-create" data-toggle="modal" data-target="#exampleModalScrollable">Add a category</button></p>
-          </div>
-        </div>
+      <div class="col-sm-3 d-flex align-items-center mt-4">
+        <button type="button" class="btn btn-outline-dark w-100" data-toggle="modal" data-target="#exampleModalScrollable">Create new category</button>
       </div>
 
       <!-- create category Modal -->
@@ -82,7 +73,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">Add a category</h5>
+              <h4 class="modal-title devise-headings" id="exampleModalScrollableTitle">Add a category</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -90,15 +81,12 @@
             <div class="modal-body">
               <%= form_with scope: :category, model: @categories.build do |form| %>
                 <div class="form-group">
-                  <%= form.label :title %>
+                  <%= form.label :title, class: "devise-headings" %>
                   <%= form.text_field :title, class: "form-control" %>
                 </div>
 
-                <%= form.submit class: "btn btn-danger" %>
+                <%= form.submit class: "btn btn-outline-success w-100" %>
               <% end %>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
