@@ -4,12 +4,23 @@ class Task < ApplicationRecord
         completed: 1
     }
 
-    # Blog.first.published?
-    # Blog.first.draft?
-    # Blog.first.published!
-    # Blog.first.draft!
-
     belongs_to :category
     validates :title, :description, :deadline, :category_id, presence: true
     validates :description, length: { minimum: 5, maximum: 35 }
+    validate :not_past_date
+
+    # has_many :users
+    has_many :users, through: :categories    
+
+    scope :in_progress, -> { where(status: "in_progress") }
+    scope :completed, -> { where(status: "completed") }
+
+    private
+    def not_past_date
+        return if deadline.nil? || deadline.today?
+
+        if deadline.past?
+            return errors.add(:deadline, "must be valid")
+        end
+    end
 end

@@ -4,4 +4,5 @@ class Category < ApplicationRecord
 
   validates :title, :user, presence: true
   validates :title, length: { maximum: 30 }
+  validates :title, uniqueness: true  
 end

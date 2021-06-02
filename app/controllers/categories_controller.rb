@@ -3,10 +3,12 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [ :show, :edit, :update, :destroy ]
 
   def index
+    flash[:task_error] = nil
     @categories = current_user.categories.order(created_at: :desc)
   end
 
   def show    
+    flash[:task_error] = nil
   end
 
   def new
@@ -19,7 +21,9 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: "A category was successfully added."
     else
-      render :new
+      @categories = current_user.categories.order(created_at: :desc)
+      flash[:task_error] = @category.errors.full_messages
+      render 'categories/index'
     end
   end
 
@@ -27,8 +31,14 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category.update(category_params)
-    redirect_to @category, notice: "A category was successfully updated."
+    @title = @category.title
+
+    if @category.update(category_params)
+      redirect_to @category, notice: "A category was successfully updated."
+    else
+      flash[:task_error] = @category.errors.full_messages
+      render :show
+    end
   end
 
   def destroy

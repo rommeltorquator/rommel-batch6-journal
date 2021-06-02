@@ -5,7 +5,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @category = categories(:one)
-    @task = Task.create(title: "This is it", description: "This is the description", deadline: "2021-24-05 19:36:14", category_id: @category.id)
+    @task = @category.tasks.create(title: "This is it", description: "This is the description", deadline: "2021-24-05 19:36:14")
   end
 
   test "should show task create form" do

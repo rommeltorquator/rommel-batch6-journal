@@ -1,10 +1,25 @@
+<% if flash[:task_error] %>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <ul>
+            <% flash[:task_error].each do |error| %>
+              <li class="text-danger"><%= error %></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+  </div>
+<% end %>
+
+
 <p class="text-center">
   <button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable<%= @category.id %>">
-    <h1 class="mt-4 display-4 font-weight-bold"><%= @category.title %></h1>
+    <h1 class="<%= 'mt-4' if flash[:task_error].nil? && notice.nil? %> display-4 font-weight-bold"><%= @title if @title %><%= @category.title %></h1>
   </button>
 </p>
 
-<p class="text-center">Created: <%= @category.created_at %> | Tasks: <%= @category.tasks.count %> | Completed: <%= @category.tasks.where(status: 'completed').count %></p>
+<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Tasks: <%= @category.tasks.count %> | Completed: <%= @category.tasks.where(status: 'completed').count %></p>
 
 <!-- category edit modal -->
 <div class="modal fade" id="exampleModalScrollable<%= @category.id %>" tabindex="-1" role="dialog"
@@ -37,75 +52,229 @@
   <%= link_to @category, method: :delete, data: { confirm: 'Are you sure?' }, class: "edit-category" do %>Delete<% end %>
 </p>
 
-<div class="bg-dark py-3">
-  <h4 class="text-center font-secondary">Tasks</h4>
-</div>
-
-<div class="container mt-4">
-  <table class="table table-fixed">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Deadline</th>
-        <th scope="col">Status</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @category.tasks.each do |c| %>
-        <tr>
-          <th scope="row"><%= c.title %></th>
-          <td><%= c.description %></td>
-          <td><%= c.deadline %></td>
-          <th scope="row"><%= c.status.capitalize() %></th>
-          <td>
-          
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>">Edit</button>
-            
-            <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %>Delete<% end %>
-          
-            <!-- task edit Modal -->
-            <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <%= form_with scope: :task, model: c, local: true do |form| %>
-                      <%= hidden_field_tag :category_id, c.category_id %>
-
-                      <div class="form-group">
-                        <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+<% if @category.tasks.count > 0 %>
+  <!-- in-progress row -->
+  <% if @category.tasks.in_progress.count > 0 %>
+    <!-- heading -->
+    <div class="bg-gray py-3">
+      <h4 class="text-center font-white">On-going Tasks</h4>
+    </div>  
+  
+    <!-- table -->
+    <div class="container mt-4">
+      <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.tasks.in_progress.order(deadline: :asc).each do |c| %>
+            <tr>
+              <th scope="row"><%= c.title %></th>
+              <td><%= c.description %></td>
+              <th scope="row"><span class="text-danger"><%= c.deadline.strftime("%B %-d, %Y") %></span></th>
+              <th scope="row">
+                <% if c.status == 'completed' %>
+                  <span class="text-success"><%= c.status.capitalize() %></span>
+                <% else %>
+                  <span class="text-warning"><%= c.status.sub('_', ' ').capitalize() %></span>
+                <% end %>
+              </th>
+              <td>            
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>">Edit</button>
+                
+                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %>Delete<% end %>
+              
+                <!-- task edit Modal -->
+                <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
+                      <div class="modal-body">                        
+                        <%= form_with scope: :task, model: c, local: true do |form| %>
+                          <%= hidden_field_tag :category_id, c.category_id %>
 
-                      <div class="form-group">
-                        <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+                          <div class="form-group">
+                            <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.date_field :deadline, class: "form-control" %></p>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
+                          </div>
+
+                          <%= form.submit class: "btn btn-outline-success w-100" %>
+                        <% end %>
                       </div>
-
-                      <div class="form-group">
-                        <p><%= form.date_field :deadline, class: "form-control" %></p>
-                      </div>
-
-                      <div class="form-group">
-                        <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
-                      </div>
-
-                      <%= form.submit class: "btn btn-outline-success w-100" %>
-                    <% end %>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- end modal -->  
-          </td>
-          
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+                <!-- end modal -->  
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>      
+    </div>
+  <% end %> 
+
+  <!-- completed row -->
+  <% if @category.tasks.completed.count > 0 %>
+    <!-- heading -->
+    <div class="bg-dark py-3">
+      <h4 class="text-center font-white">Completed</h4>
+    </div>  
+  
+    <!-- table -->
+    <div class="container mt-4">
+      <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.tasks.completed.order(deadline: :asc).each do |c| %>
+            <tr>
+              <th scope="row"><%= c.title %></th>
+              <td><%= c.description %></td>
+              <th scope="row"><%= c.deadline.strftime("%B %-d, %Y") %></th>
+              <th scope="row">
+                <% if c.status == 'completed' %>
+                  <span class="text-success"><%= c.status.capitalize() %></span>
+                <% else %>
+                  <span class="text-warning"><%= c.status.capitalize() %></span>
+                <% end %>
+              </th>
+              <td>            
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>">Edit</button>
+                
+                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %>Delete<% end %>
+              
+                <!-- task edit Modal -->
+                <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <%= form_with scope: :task, model: c, local: true do |form| %>
+                          <%= hidden_field_tag :category_id, c.category_id %>
+
+                          <div class="form-group">
+                            <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.date_field :deadline, class: "form-control" %></p>
+                          </div>
+
+                          <div class="form-group">
+                            <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
+                          </div>
+
+                          <%= form.submit class: "btn btn-outline-success w-100" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end modal -->  
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+
+  <!-- add task button -->
+  <p class="card-text text-center mb-0"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable5">+ Add a task</button></p>
+
+<!-- empty task -->
+<% else %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <%= image_tag("Ice cream seller-cuate.png", :alt => "No tasks available", class: "w-100") %>
+        <p class="card-text text-center"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable5">+ Add a task</button></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- add task Modal -->
+<div class="modal fade" id="exampleModalScrollable5" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalScrollableTitle5" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h5 class="modal-title" id="exampleModalScrollableTitle5">Add a task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if flash[:task_error] %>
+          <ul>
+            <% flash[:task_error].each do |error| %>
+              <li class="text-danger"><%= error %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        
+        <%= form_with scope: :task, model: @category.tasks.build, url: '/tasks/create2', method: :post do |form| %>
+        <%#= form_with scope: :task, model: @category.tasks.build, local: true do |form| %>           
+          <%= hidden_field_tag :category_id, @category.id %>
+
+          <div class="form-group">
+            <%= form.text_field :title, placeholder: "Title", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <p><%= form.text_area :description, placeholder: "Description", class: "form-control", rows: 10 %></p>
+          </div>
+
+          <div class="form-group">
+            <p><%= form.date_field :deadline, class: "form-control" %></p>
+          </div>
+
+          <div class="form-group">
+            <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
+          </div>
+
+          <%= form.submit class: "btn btn-outline-success w-100" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

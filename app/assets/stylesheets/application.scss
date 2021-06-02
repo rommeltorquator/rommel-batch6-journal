@@ -84,8 +84,42 @@ h1 {
     color: #f0efdb;
 }
 
+.font-white {
+    color: #fefefe;
+}
+
 .font-green {
     color: #2e4723;
+}
+
+.text-success {
+    color: green !important;
+}
+
+.text-warning {
+    color: orange !important;
+}
+
+.no-tasks {
+    font-size: 21px;
+}
+
+.category-link {
+    font-weight: 500;   
+    font-size: 23px;
+    color: #555;    
+}
+
+.category-p {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.category-link:hover,
+.category-link:active {
+    color: #555;
+    text-decoration: none;
+    color: #28a745;
 }
 
 .bg-dark {
@@ -98,6 +132,10 @@ h1 {
 
 .bg-white {
     background-color: #fbfbfd;
+}
+
+.bg-gray {
+    background-color: #444;
 }
 
 .main-btn {
@@ -122,7 +160,7 @@ h1 {
 .card {
     border: none !important;
     background-color: #fefefe !important;
-    min-height: 195px;
+    min-height: 185px;
     box-shadow: 1px 3px 5px #666 !important;
     border-radius: 0 !important;
 }
@@ -235,7 +273,7 @@ th {
 }
 
 .content-wrap {
-    padding-bottom: 3rem;    /* Footer height */
+    // padding-bottom: 3rem;    /* Footer height */
 }
 
 .footer {
@@ -292,11 +330,11 @@ input[type="radio"], input[type="checkbox"] {
 .btn-outline-dark,
 .btn-outline-light {
     border-radius: 0 !important;
-    border-width: 3px;
+    border-width: 2px;
 }
 
-.btn-outline-dark {
-    height: 55px;
+.btn-dark {
+    border-radius: 0 !important;
 }
 
 .alert-danger,
@@ -315,4 +353,8 @@ input[type="radio"], input[type="checkbox"] {
 
 .modal-backdrop { 
     opacity:0.3 !important;
+}
+
+.category-link {
+    line-height: 1;
 }

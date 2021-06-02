@@ -1,50 +1,61 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [ :edit, :destroy ]
-  # def index
-  #   @tasks = Task.all.order(id: :desc)
-  # end
-
-  # def show
-  #   @task = Task.find(params[:id])
-  # end
-
-  # def new
-  #   @task = Task.new
-  # end
+  before_action :set_category, only: [ :create, :update, :destroy, :create2 ]
 
   def create
-    category = Category.find(params[:category_id])
-    @task = category.tasks.create(task_params)
+    @task = @category.tasks.create(task_params)
 
-    # redirect_to category_path(category)
-    redirect_to categories_path, notice: "A task was successfully added."
+    if @task.save
+      redirect_to categories_path, notice: "A task was successfully added."
+      # redirect_to category_path(@category), notice: "A task was successfully added."
+    else
+      # @error = @category.tasks.build.errors.full_messages
+      flash[:task_error] = @task.errors.full_messages
+      # redirect_to categories_path
+
+      render '/categories/show'
+    end
   end
 
-  # def edit
-  # end
+  def create2
+    # @category = Category.find(params[:category_id])   
+    @task = @category.tasks.create(task_params)
+
+    if @task.save
+      # redirect_to categories_path, notice: "A task was successfully added."
+      redirect_to category_path(@category), notice: "A task was successfully added."
+    else
+      # @error = @category.tasks.build.errors.full_messages
+      flash[:task_error] = @task.errors.full_messages
+      # redirect_to category_url(category)
+
+      render 'categories/show'
+    end
+  end
 
   def update
-    category = Category.find(params[:category_id])
-    @task = category.tasks.find(params[:id]).update(task_params)    
+    @task = @category.tasks.find(params[:id])
 
-    # @task.update(task_params)
-    # redirect_to task_path(@task)
-    # redirect_to categories_path
-    redirect_to category_path(category), notice: "A task was successfully updated."
+    if @task.update(task_params) 
+      redirect_to category_path(@category), notice: "A task was successfully updated."
+    else
+      flash[:task_error] = @task.errors.full_messages
+      render 'categories/show/'
+    end
   end
 
   def destroy
-    @category = Category.find(params[:category_id])
-    # @task = Task.find(params[:id])
-
     @task.destroy
     redirect_to category_path(@category), notice: "A task was successfully deleted."
-    # redirect_to categories_path
   end
 
   private
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])   
   end
 
   def task_params
