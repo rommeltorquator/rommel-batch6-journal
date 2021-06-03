@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.in_progress
   end
 end
