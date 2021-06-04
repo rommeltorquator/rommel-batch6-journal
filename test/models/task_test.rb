@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :bigint           not null, primary key
+#  title       :string
+#  description :text
+#  deadline    :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :bigint           not null
+#  status      :integer          default("in_progress")
+#
 require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase

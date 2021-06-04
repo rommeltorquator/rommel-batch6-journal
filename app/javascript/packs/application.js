@@ -17,7 +17,7 @@ ActiveStorage.start()
 import "bootstrap"
 
 $(document).on('turbolinks:load', function(){
-    $(".alert-success" ).fadeOut(10000);
-    $(".alert-danger" ).fadeOut(10000);
-    $(".task-error" ).fadeOut(10000);
+    $(".alert-success" ).fadeOut(5000);
+    $(".alert-danger" ).fadeOut(5000);
+    $(".task-error" ).fadeOut(8000);
 });

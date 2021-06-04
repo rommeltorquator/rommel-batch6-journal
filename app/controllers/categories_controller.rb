@@ -5,10 +5,15 @@ class CategoriesController < ApplicationController
   def index
     flash[:task_error] = nil
     @categories = current_user.categories.order(created_at: :desc)
+    @page_title = "All Categories"
   end
 
-  def show    
+  def show
     flash[:task_error] = nil
+    @page_title = @category.title
+    # @page_title = "tae"
+
+    # @user = User.friendly.find(params[:id])
   end
 
   def new
@@ -48,7 +53,7 @@ class CategoriesController < ApplicationController
 
   private
   def set_category
-    @category = current_user.categories.find(params[:id])
+    @category = current_user.categories.friendly.find(params[:id])
   end
 
   def category_params

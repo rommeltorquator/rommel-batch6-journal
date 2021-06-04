@@ -1,10 +1,50 @@
-<div class="container mt-4">
+<div class="container mt-5">
   <div class="row">
-    <div class="col-md-4">
-      <h1>This is the fucking dashboard fucka!!</h1>
-      <p>In-progress: <%= @tasks.count %></p>
+    <div class="col-md-8 d-flex flex-column justify-content-center">
+      <div class="bg-green-2 py-5 pl-5">
+        <p class="font-primary dashboard-p-2"><i class="fa fa-calendar"></i> <%= @today %></p>
+        <h1 class="font-green">Welcome, <%= current_user.first_name %></h1>
+        <p class="font-primary dashboard-p mb-0">You have <strong><%= @tasks.where(deadline: DateTime.current.beginning_of_day).count %></strong> out of <strong><%= @tasks.count %></strong> tasks that are due today.</p>
+        <p class="font-primary dashboard-p mt-0">You have <strong><%= current_user.categories.count %></strong> categor<%= current_user.categories.count > 1 ? 'ies.' : 'y' %></p>
+      </div>
     </div>
 
-    <div class="col-md-8 bg-primary"></div>
-  </div>
-</div>
+    <div class="col-md-4 d-flex flex-column justify-content-center">
+      <%= image_tag("Work in progress-pana.png", :alt => "Organize your life", class: "w-100") %>
+    </div>
+
+    <!-- table -->
+    <div class="container mt-4">
+      <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Description</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Status</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tasks.order(deadline: :asc).each do |task| %>
+            <tr class="<%= 'bg-green-2-table' if task.deadline.beginning_of_day == DateTime.current.beginning_of_day %>">
+              <th scope="row"><%= task.title %></th>
+              <td><%= task.description %></td>
+
+              <th scope="row"><span class="<%= 'text-danger' if task.deadline.beginning_of_day == DateTime.current.beginning_of_day %>"><%= task.deadline.strftime("%B %-d, %Y") %></span></th>
+
+              <th scope="row">
+                <% if task.status == 'completed' %>
+                  <span class="text-success"><%= task.status.capitalize() %></span>
+                <% else %>
+                  <span class="text-warning"><%= task.status.sub('_', ' ').capitalize() %></span>
+                <% end %>
+              </th>
+              <th scope="row"><%= link_to task.category.title, category_path(task.category), class: "btn btn-outline-primary" %></th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- row -->
+</div> <!-- container -->

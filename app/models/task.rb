@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :bigint           not null, primary key
+#  title       :string
+#  description :text
+#  deadline    :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :bigint           not null
+#  status      :integer          default("in_progress")
+#
 class Task < ApplicationRecord
     enum status: { # do not forget to add default in the migration file
         in_progress: 0,
@@ -7,7 +20,7 @@ class Task < ApplicationRecord
     belongs_to :category
     validates :title, :description, :deadline, :category_id, presence: true
     validates :description, length: { minimum: 5, maximum: 35 }
-    validate :not_past_date
+    validate :not_past_date, on: :create
 
     # has_many :users
     has_many :users, through: :categories    

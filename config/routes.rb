@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :categories
 
-  devise_for :users
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'sign_up' }
+
   root "home#index"
   get 'dashboard', to: 'home#dashboard'
 

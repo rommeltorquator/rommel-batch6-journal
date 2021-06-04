@@ -12,14 +12,13 @@
   </div>
 <% end %>
 
-
 <p class="text-center">
   <button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable<%= @category.id %>">
     <h1 class="<%= 'mt-4' if flash[:task_error].nil? %> display-4 font-weight-bold"><%= @title if @title %><%= @category.title %></h1>
   </button>
 </p>
 
-<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Tasks: <%= @category.tasks.count %> | Completed: <%= @category.tasks.where(status: 'completed').count %></p>
+<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Task<%= 's' if @category.tasks.count > 1 %>: <%= @category.tasks.count %> | Completed: <%= @category.tasks.where(status: 'completed').count %></p>
 
 <!-- category edit modal -->
 <div class="modal fade" id="exampleModalScrollable<%= @category.id %>" tabindex="-1" role="dialog"
@@ -56,7 +55,7 @@
   <!-- in-progress row -->
   <% if @category.tasks.in_progress.count > 0 %>
     <!-- heading -->
-    <div class="bg-gray py-3">
+    <div class="bg-gray py-2">
       <h4 class="text-center font-white">On-going Tasks</h4>
     </div>  
   
@@ -138,10 +137,10 @@
   <!-- completed row -->
   <% if @category.tasks.completed.count > 0 %>
     <!-- heading -->
-    <div class="bg-dark py-3">
+    <div class="bg-dark py-2">
       <h4 class="text-center font-white">Completed</h4>
     </div>  
-  
+
     <!-- table -->
     <div class="container mt-4">
       <table class="table table-fixed">
@@ -155,7 +154,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @category.tasks.completed.order(deadline: :asc).each do |c| %>
+          <% @category.tasks.completed.order(updated_at: :desc).each do |c| %>
             <tr>
               <th scope="row"><%= c.title %></th>
               <td><%= c.description %></td>
@@ -208,7 +207,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- end modal -->  
+                <!-- end modal -->
               </td>
             </tr>
           <% end %>
