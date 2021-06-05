@@ -34,6 +34,7 @@ gem 'devise'
 gem "font-awesome-rails"
 gem 'jquery-rails', '~> 4.4'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+gem 'pagy', '~> 4.7', '>= 4.7.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    include Pagy::Backend
+    
     before_action :set_page_defaults
     before_action :configure_permitted_parameters, if: :devise_controller?
     
@@ -9,7 +11,7 @@ class ApplicationController < ActionController::Base
 
     def set_page_defaults
         @page_title = "Organize - Be efficient with your time"
-    end    
+    end
 
     protected
     def configure_permitted_parameters

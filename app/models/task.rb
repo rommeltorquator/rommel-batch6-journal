@@ -27,6 +27,7 @@ class Task < ApplicationRecord
 
     scope :in_progress, -> { where(status: "in_progress") }
     scope :completed, -> { where(status: "completed") }
+    scope :less_than_today, -> { where("deadline < ?", DateTime.current.beginning_of_day) }
 
     private
     def not_past_date

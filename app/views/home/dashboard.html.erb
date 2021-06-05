@@ -1,7 +1,6 @@
 <div class="container mt-5">
   <div class="row">
 
-
     <% if current_user.categories.count == 0 %>
       <div class="col-md-12 d-flex flex-column justify-content-center">
         <div class="bg-green-2 py-4 pl-5">
@@ -21,7 +20,7 @@
           <p class="font-primary dashboard-p-2"><i class="fa fa-calendar"></i> <%= @today %></p>
           <h1 class="font-green">Welcome, <%= current_user.first_name %></h1>
           <p class="font-primary dashboard-p mb-0">You have <strong><%= @tasks.where(deadline: DateTime.current.beginning_of_day).count %></strong> out of <strong><%= @tasks.count %></strong> tasks that are due today.</p>
-          <p class="font-primary dashboard-p mt-0">You have <strong><%= current_user.categories.count %></strong> categor<%= current_user.categories.count > 1 ? 'ies.' : 'y.' %></p>
+          <p class="font-primary dashboard-p mt-0">You have <strong><%= current_user.categories.count %></strong> categor<%= current_user.categories.count > 1 ? 'ies.' : 'y.' %> <strong><%= @overdue.count %></strong> overdue tasks.</p>
           <!-- add task button -->
           <p class="card-text mb-0"><button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalScrollable5">+ Create new category</button></p>
         </div>
@@ -64,9 +63,11 @@
               <% end %>
             </tbody>
           </table>
-        </div>        
+        </div>
       <% end %>
-    <% end %>
+    <% end %>    
+
+    
 
     <!-- create category Modal -->
     <div class="modal fade" id="exampleModalScrollable5" tabindex="-1" role="dialog"
