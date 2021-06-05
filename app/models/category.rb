@@ -15,7 +15,14 @@ class Category < ApplicationRecord
 
   validates :title, :user, presence: true
   validates :title, length: { maximum: 30 }
+  validate :unique_category # unique category per user
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  private
+  def unique_category
+    results = user.categories.where(title: title)
+    errors.add(:title, "already exists") if results.present?
+  end
 end
