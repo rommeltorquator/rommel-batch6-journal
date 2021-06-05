@@ -21,7 +21,7 @@ class Task < ApplicationRecord
   validates :title, :description, :deadline, :category_id, presence: true
   validates :description, length: { minimum: 5, maximum: 35 }
   validate :not_past_date, on: :create
-  validate :unique_task_per_category, on: [ :create, :update ]
+  validate :unique_task_per_category, on: [ :create ]
 
   # has_many :users
   has_many :users, through: :categories
@@ -31,6 +31,9 @@ class Task < ApplicationRecord
   scope :less_than_today, -> { where("deadline < ?", DateTime.current.beginning_of_day) }
 
   private
+  def user
+    category.user
+  end
 
   def not_past_date
     return if deadline.nil? || deadline.today?
@@ -41,8 +44,7 @@ class Task < ApplicationRecord
   end
 
   def unique_task_per_category
-    c = category
-    results = c.tasks.where(title: title)
+    results = category.tasks.where(title: title)
     errors.add(:title, " already exists") if results.present?
   end
 end

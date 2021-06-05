@@ -3,10 +3,10 @@ class TasksController < ApplicationController
   before_action :set_category, only: [ :create, :update, :destroy, :create2 ]
 
   def create
+    flash[:task_error] = nil
     @task = @category.tasks.create(task_params)
 
     if @task.save
-      flash[:task_error] = nil
       redirect_to categories_path, notice: "A task was successfully added."
       # redirect_to category_path(@category), notice: "A task was successfully added."
     else
@@ -20,10 +20,10 @@ class TasksController < ApplicationController
 
   def create2
     # @category = Category.find(params[:category_id])   
+    flash[:task_error] = nil
     @task = @category.tasks.create(task_params)
 
     if @task.save
-      flash[:task_error] = nil
       # redirect_to categories_path, notice: "A task was successfully added."
       redirect_to category_path(@category), notice: "A task was successfully added."
     else
@@ -36,10 +36,10 @@ class TasksController < ApplicationController
   end
 
   def update
+    flash[:task_error] = nil
     @task = @category.tasks.find(params[:id])
 
     if @task.update(task_params) 
-      flash[:task_error] = nil
       redirect_to category_path(@category), notice: "A task was successfully updated."
     else
       flash[:task_error] = @task.errors.full_messages
