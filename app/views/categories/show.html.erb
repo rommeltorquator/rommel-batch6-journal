@@ -14,7 +14,7 @@
 
 <p class="text-center">
   <button type="button" class="btn btn-link mb-0 show-button" data-toggle="modal" data-target="#exampleModalScrollable<%= @category.id %>">
-    <h1 class="<%= 'mt-4' if flash[:task_error].nil? %> display-4 font-weight-bold"><%= @title if @title %><%= @category.title %></h1>
+    <h1 class="<%= 'mt-4' if flash[:task_error].nil? %> display-4 font-weight-bold"><%= @title ? @title : @category.title %></h1>
   </button>
 </p>
 

@@ -28,4 +28,9 @@ class UserTest < ActiveSupport::TestCase
   
     assert_not_nil user(:one).errors[:email]
   end
+
+  test "must be unique email" do
+    user = users(:one)
+    refute user.valid?
+  end
 end

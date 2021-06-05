@@ -36,12 +36,12 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @title = @category.title
-
+    title = @category.title
     if @category.update(category_params)
       redirect_to @category, notice: "A category was successfully updated."
     else
       flash[:task_error] = @category.errors.full_messages
+      @title = title
       render :show
     end
   end

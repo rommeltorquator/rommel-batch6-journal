@@ -12,12 +12,10 @@
 
 one:
   id: 1
-  title: MyString
-  description: MyString
+  title: MyString1
   user: one
 
 two:
   id: 2
   title: MyString2
-  description: MyString2
   user: two

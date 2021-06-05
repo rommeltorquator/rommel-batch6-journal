@@ -17,7 +17,11 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: "rommel@gmail.com"
+  email: rommel@gmail.com
+  first_name: Rommel
+  last_name: Torquator
 #
 two:
-  email: "melo@gmail.com"
+  email: melo@gmail.com
+  first_name: Melo
+  last_name: Torquator

@@ -15,7 +15,7 @@ class Category < ApplicationRecord
 
   validates :title, :user, presence: true
   validates :title, length: { maximum: 30 }
-  validate :unique_category # unique category per user
+  validate :unique_category, on: :create # unique category per user
 
   extend FriendlyId
   friendly_id :title, use: :slugged

@@ -12,6 +12,7 @@
 #  status      :integer          default("in_progress")
 #
 require "test_helper"
+require 'active_record/fixtures'
 
 class TaskTest < ActiveSupport::TestCase
   # test "the truth" do
@@ -19,34 +20,38 @@ class TaskTest < ActiveSupport::TestCase
   # end
 
   test "valid task" do
-    assert tasks(:one).valid?
+    task = categories(:one).tasks.new(title: "MyString", description: "MyText is this", deadline: "2021-09-19 09:49:28", status: "in_progress")
+
+    assert task.valid?
   end
 
-  test "invalid without title" do # add presence: true
-    tasks(:one).title = nil
-    refute tasks(:one).valid?
-  
-    assert_not_nil tasks(:one).errors[:title]
+  test "attributes must not be blank" do
+    task = categories(:one).tasks.new(title: "", description: "", deadline: "", status: "")
+
+    assert task.invalid?
   end
 
-  test "invalid without description" do # add presence: true
-    tasks(:one).description = nil
-    refute tasks(:one).valid?
-  
-    assert_not_nil tasks(:one).errors[:description]
+  test "title must not null" do
+    task = categories(:one).tasks.new(title: "MyString", description: "MyText is this", deadline: "2021-09-19 09:49:28", status: "in_progress")
+
+    assert task.valid?
   end
 
-  test "invalid without deadline" do # add presence: true
-    tasks(:one).deadline = nil
-    refute tasks(:one).valid?
-  
-    assert_not_nil tasks(:one).errors[:deadline]
+  test "description must not null" do
+    task = categories(:one).tasks.new(title: "MyString", description: "MyText is this", deadline: "2021-09-19 09:49:28", status: "in_progress")
+
+    assert task.valid?
   end
 
-  test "invalid without category" do # add presence: true
-    tasks(:one).category = nil
-    refute tasks(:one).valid?
-  
-    assert_not_nil tasks(:one).errors[:category]
+  test "deadline must not be past due" do
+    task = categories(:one).tasks.new(title: "MyString", description: "MyText is this", deadline: "2021-04-19 09:49:28", status: "in_progress")
+
+    assert task.invalid?
+  end
+
+  test "task title must be unique" do
+    new_task = tasks(:one)
+
+    refute new_task.valid?
   end
 end

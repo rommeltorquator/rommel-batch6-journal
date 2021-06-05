@@ -17,9 +17,10 @@ one:
   description: MyText
   deadline: 2021-05-19 09:49:28
   category: one
+  status: in_progress
 
 two:
-  title: MyString
-  description: MyText
+  title: MyString2
+  description: MyText2
   deadline: 2021-05-19 09:49:28
-  category: two
+  category: in_progress
