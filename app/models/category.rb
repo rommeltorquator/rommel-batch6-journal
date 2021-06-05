@@ -23,6 +23,6 @@ class Category < ApplicationRecord
   private
   def unique_category
     results = user.categories.where(title: title)
-    errors.add(:title, "already exists") if results.present?
+    errors.add(:title, " already exists") if results.present?
   end
 end
