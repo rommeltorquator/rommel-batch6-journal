@@ -5,7 +5,6 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @category = categories(:one)
-    @task = @category.tasks.create(title: "This is it", description: "This is the description", deadline: "2021-24-05 19:36:14")
   end
 
   test "should show task create form" do
@@ -35,18 +34,11 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should destroy a task" do
+  test "should show a specific category after logging in" do
     sign_in users(:one)
-    # sign_out users(:one)
+    get category_path(@category)
 
-    get categories_path
     assert_response :success
-
-    assert_difference('Task.count', -1) do
-      delete task_path(tasks(:one))
-    end
-
-    assert_response :redirect
   end
 
   test "should be able to logout while seeing the tasks" do

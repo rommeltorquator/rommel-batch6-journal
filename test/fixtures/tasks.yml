@@ -15,12 +15,13 @@
 one:
   title: MyString
   description: MyText
-  deadline: 2021-05-19 09:49:28
+  deadline: 2021-09-19 09:49:28
   category: one
   status: in_progress
 
 two:
   title: MyString2
   description: MyText2
-  deadline: 2021-05-19 09:49:28
-  category: in_progress
+  deadline: 2021-09-19 09:49:28
+  category: one
+  status: in_progress

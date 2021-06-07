@@ -62,14 +62,5 @@ class CategoriesFlowTest < ActionDispatch::IntegrationTest
   
     get "/categories/#{categories(:one).id}"
     assert_response :success
-
-    get "/tasks/new"
-    assert_response :success
   end
-
-  # test "can destroy a task related to a category" do
-  #   sign_in users(:one)
-
-
-  # end
 end
