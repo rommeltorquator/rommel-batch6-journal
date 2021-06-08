@@ -18,7 +18,7 @@
   </button>
 </p>
 
-<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Task<%= 's' if @category.tasks.count > 1 %>: <%= @category.tasks.count %> | Ongoing: <%= @category.tasks.in_progress.count %> | Completed: <%= (((@category.tasks.where(status: 'completed').count).to_f / (@category.tasks.count).to_f) * 100).ceil %>%</p>
+<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Task<%= 's' if @category.tasks.count > 1 %>: <%= @category.tasks.count %> | Ongoing: <%= @category.tasks.in_progress.count %> | Completed: <%= @category.tasks.where(status: 'completed').count > 0 ? (((@category.tasks.where(status: 'completed').count).to_f / (@category.tasks.count).to_f) * 100).ceil : 0 %>%</p>
 
 <!-- category edit modal -->
 <div class="modal fade" id="exampleModalScrollable<%= @category.id %>" tabindex="-1" role="dialog"
