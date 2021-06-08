@@ -42,8 +42,6 @@ h6 {
 
 body {
   background-color: #f0efdb;
-  position: relative;
-  min-height: 100vh;
 }
 
 h1 {
@@ -114,7 +112,7 @@ h1 {
 }
 
 .category-p {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 500;
 }
 
@@ -313,12 +311,8 @@ th {
 }
 
 .footer {
-  background-color: #4a663d;
-  // background-color: #666;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3rem; /* Footer height */
+  // background-color: #4a663d;
+  background-color: #666;
 
   ul {
     margin-bottom: 0;
@@ -331,7 +325,7 @@ th {
 
       a {
         font-size: 14px;
-        color: #fefefe;
+        color: #f3f3f3;
       }
     }
   }

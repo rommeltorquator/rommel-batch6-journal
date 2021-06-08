@@ -32,7 +32,7 @@
                 <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">+ Add a task</button></p>
               <% end %>
 
-              <p class="card-text text-center"><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" do %>Delete<% end %></p>
+              <p class="card-text text-center"><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" do %><i class="fa fa-trash"></i> Delete<% end %></p>
             </div>
           </div>
         </div>

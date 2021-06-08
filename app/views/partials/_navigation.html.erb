@@ -47,7 +47,7 @@
                 <% end %>
             <% else %>
                 <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-                  Sign out
+                  <i class="fa fa-sign-out"></i> Sign out
                 <% end %>
             <% end %>
           </li>
@@ -64,17 +64,6 @@
             <% end %>   
           </li>
           <li class="nav-item">
-            <% if request.path == new_user_session_path %>
-                <%= link_to new_user_session_path, class: "nav-link active" do %>
-                  Sign in
-                <% end %>
-            <% else %>
-                <%= link_to new_user_session_path, class: "nav-link" do %>
-                  Sign in
-                <% end %>
-            <% end %>   
-          </li>
-          <li class="nav-item">
             <% if request.path == new_user_registration_path %>
                 <%= link_to new_user_registration_path, class: "nav-link active" do %>
                   Sign up
@@ -85,6 +74,17 @@
                 <% end %>
             <% end %>
           </li>
+          <li class="nav-item">
+            <% if request.path == new_user_session_path %>
+                <%= link_to new_user_session_path, class: "nav-link active" do %>
+                  <i class="fa fa-sign-in"></i> Sign in
+                <% end %>
+            <% else %>
+                <%= link_to new_user_session_path, class: "nav-link" do %>
+                  <i class="fa fa-sign-in"></i> Sign in
+                <% end %>
+            <% end %>   
+          </li>          
         <% end %>
       </ul>
     </div>
