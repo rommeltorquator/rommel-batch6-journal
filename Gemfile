@@ -6,7 +6,7 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+# gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -35,6 +35,7 @@ gem "font-awesome-rails"
 gem 'jquery-rails', '~> 4.4'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'pagy', '~> 4.7', '>= 4.7.1'
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
