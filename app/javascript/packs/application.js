@@ -16,8 +16,11 @@ ActiveStorage.start()
 
 import "bootstrap"
 
-$(document).on('turbolinks:load', function(){
-    $(".alert-success" ).fadeOut(5000);
-    $(".alert-danger" ).fadeOut(5000);
-    $(".task-error" ).fadeOut(8000);
+$(document).on('turbolinks:load', function () {
+  $(".alert-success").fadeOut(5000);
+  $(".alert-danger").fadeOut(5000);
+  $(".task-error").fadeOut(8000);
+
+  let taskCount = parseInt(document.querySelector("#task-count").innerText);
+  if (taskCount > 0) $("#exampleModalScrollable100").modal('show');
 });

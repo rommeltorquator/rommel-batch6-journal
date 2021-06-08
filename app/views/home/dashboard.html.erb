@@ -3,7 +3,7 @@
 
     <% if current_user.tasks.in_progress.count == 0 %>
       <div class="col-md-12 d-flex flex-column justify-content-center">
-        <div class="bg-green-2 py-4 pl-5">
+        <div class="bg-green-2 py-4 pl-5 pr-5">
           <p class="font-primary dashboard-p-2"><i class="fa fa-calendar"></i> <%= @today %></p>
           <h1 class="font-green">Welcome, <%= current_user.first_name %></h1>
           <p class="font-primary dashboard-p mb-0">You have <strong><%= current_user.tasks.in_progress.count  %></strong> pending tasks and <strong><%= current_user.categories.count  %></strong> categories.</p>
@@ -16,10 +16,13 @@
       </div>
     <% else %>
       <div class="col-md-8 d-flex flex-column justify-content-center">
-        <div class="bg-green-2 py-4 pl-5">
+        <div class="bg-green-2 py-4 pl-5 pr-5">
           <p class="font-primary dashboard-p-2"><i class="fa fa-calendar"></i> <%= @today %></p>
           <h1 class="font-green">Welcome, <%= current_user.first_name %></h1>
-          <p class="font-primary dashboard-p mb-0">You have <strong><%= @tasks.where(deadline: DateTime.current.beginning_of_day).count %></strong> out of <strong><%= @tasks.count %></strong> <%= @tasks.count > 1 ? 'tasks' : 'task' %> that <%= @tasks.count > 1 ? 'are' : 'is' %> due today.</p>
+          <p class="font-primary dashboard-p mb-0">You have <strong><%= @tasks.where(deadline: DateTime.current.beginning_of_day).count %></strong> out of <strong><%= @tasks.count %></strong> ongoing <%= @tasks.count > 1 ? 'tasks' : 'task' %> that <%= @tasks.count > 1 ? 'are' : 'is' %> due today.</p>
+
+          <p class="font-primary dashboard-p mb-0"><strong><%= @completed_tasks.count %></strong> completed tasks. <strong><%= (((@completed_tasks.count).to_f / (@total_tasks.count).to_f) * 100).ceil %>%</strong> of <%= @total_tasks.count %> overall tasks.</p>
+
           <p class="font-primary dashboard-p mt-0">You have <strong><%= current_user.categories.count %></strong> categor<%= current_user.categories.count > 1 ? 'ies.' : 'y.' %> <strong><%= @overdue.count %></strong> overdue tasks.</p>
           <!-- add task button -->
           <p class="card-text mb-0"><button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalScrollable5">+ Create new category</button></p>
@@ -65,9 +68,7 @@
           </table>
         </div>
       <% end %>
-    <% end %>    
-
-    
+    <% end %>
 
     <!-- create category Modal -->
     <div class="modal fade" id="exampleModalScrollable5" tabindex="-1" role="dialog"
@@ -100,6 +101,28 @@
           </div>
         </div>
       </div>
-    </div> <!-- create category modal -->
-  </div> <!-- row -->
-</div> <!-- container -->
+    </div>
+    <!-- create category modal -->
+  </div>
+   <!-- row -->
+</div>
+ <!-- container -->
+
+ <!-- task reminder category Modal -->
+<div class="modal fade" id="exampleModalScrollable100" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalScrollableTitle100" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content pop-up py-3">
+      <div class="modal-body">
+        <h1 class="font-green text-center">Hi <%= current_user.first_name %>!</h1>
+        <% if @tasks.where(deadline: DateTime.current.beginning_of_day).count > 0 %>
+          <%= image_tag("Add tasks-amico.png", :alt => "No tasks available", class: "w-100") %>
+          <p class="font-primary dashboard-p mb-0 text-center">You have <strong id="task-count"><%= @tasks.where(deadline: DateTime.current.beginning_of_day).count %></strong>  <%= @tasks.where(deadline: DateTime.current.beginning_of_day).count > 1 ? 'tasks' : 'task' %> that <%= @tasks.where(deadline: DateTime.current.beginning_of_day).count > 1 ? 'are' : 'is' %> <strong>due</strong> today!</p>
+        <% else %>
+          <%= image_tag("Training at home-bro.png", :alt => "No tasks available", class: "w-100") %>
+          <p class="font-primary dashboard-p mb-0 text-center">No pending tasks for today!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -100,7 +100,7 @@ h1 {
 }
 
 .text-warning {
-  color: orange !important;
+  color: rgb(223, 146, 5) !important;
 }
 
 .no-tasks {
@@ -120,6 +120,10 @@ h1 {
 
 .dashboard-p {
   font-size: 21px;
+}
+
+.reminder-p {
+  font-size: 26px;
 }
 
 .dashboard-p-2 {
@@ -402,4 +406,8 @@ input[type="checkbox"] {
 
 .dashboard-billboard {
   border-radius: 15px;
+}
+
+.pop-up {
+  border-radius: 15px !important;
 }
