@@ -17,6 +17,6 @@ class HomeController < ApplicationController
 
   def dummy
     @all_tasks = Task.all
-    @category = Category.first
+    @category = current_user.categories.first
   end
 end
