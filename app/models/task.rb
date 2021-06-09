@@ -8,9 +8,7 @@ class Task < ApplicationRecord
   validate :not_past_date, on: :create
   validate :unique_task_per_category, on: [ :create, :create2 ]
 
-  # has_many :users
-
-  enum status: { # do not forget to add default in the migration file
+  enum status: {
     in_progress: 0,
     completed: 1
   }

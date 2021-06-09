@@ -9,7 +9,6 @@ class HomeController < ApplicationController
     @completed_tasks = current_user.tasks.completed
     @total_tasks = current_user.tasks
     @overdue = current_user.tasks.less_than_today.in_progress
-    # user.tasks.where("deadline < ?", date_today).where(status: "in_progress")
     
     @today = DateTime.current.beginning_of_day.strftime("%-d %B %Y, %A")
     @page_title = "Welcome, #{current_user.first_name}"

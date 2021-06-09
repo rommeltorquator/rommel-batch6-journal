@@ -8,28 +8,21 @@ class TasksController < ApplicationController
 
     if @task.save
       redirect_to categories_path, notice: "A task was successfully added."
-      # redirect_to category_path(@category), notice: "A task was successfully added."
     else
-      # @error = @category.tasks.build.errors.full_messages
       flash[:task_error] = @task.errors.full_messages
-      # redirect_to categories_path
 
       render '/categories/show'
     end
   end
 
   def create2
-    # @category = Category.find(params[:category_id])   
     flash[:task_error] = nil
     @task = @category.tasks.create(task_params)
 
     if @task.save
-      # redirect_to categories_path, notice: "A task was successfully added."
       redirect_to category_path(@category), notice: "A task was successfully added."
     else
-      # @error = @category.tasks.build.errors.full_messages
       flash[:task_error] = @task.errors.full_messages
-      # redirect_to category_url(category)
 
       render 'categories/show'
     end
