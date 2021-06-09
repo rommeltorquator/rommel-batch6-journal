@@ -3,9 +3,3 @@
 <%= current_user.email %>
 <%= current_user.tasks.in_progress.count %>
 <br/>
-
-<% current_user.tasks.all.each do |task| %>
-    <p><%= task.title %></p>
-    <p><%= task.description %></p>
-    <p><%= task.deadline %></p>
-<% end %>
