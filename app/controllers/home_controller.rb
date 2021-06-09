@@ -14,10 +14,4 @@ class HomeController < ApplicationController
     @today = DateTime.current.beginning_of_day.strftime("%-d %B %Y, %A")
     @page_title = "Welcome, #{current_user.first_name}"
   end
-
-  def dummy
-    @all_tasks = Task.all
-    @tasks = current_user.tasks.in_progress
-    @category = current_user.categories.first
-  end
 end
