@@ -23,14 +23,14 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "invalid without email" do # add presence: true
-    user(:one).email = nil
-    refute user(:one).valid?
+    users(:one).email = nil
+    refute users(:one).valid?
   
-    assert_not_nil user(:one).errors[:email]
+    assert_not_nil users(:one).errors[:email]
   end
 
   test "must be unique email" do
-    user = users(:one)
-    refute user.valid?
+    user = users(:two)
+    assert user.valid?
   end
 end
