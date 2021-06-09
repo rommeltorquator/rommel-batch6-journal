@@ -53,7 +53,8 @@ class CategoriesController < ApplicationController
 
   private
   def set_category
-    @category = current_user.categories.friendly.find(params[:id])
+    # @category = current_user.categories.friendly.find(params[:id])
+    @category = current_user.categories.find(params[:id])
   end
 
   def category_params
