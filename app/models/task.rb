@@ -12,7 +12,7 @@
 #  status      :integer          default("in_progress")
 #
 class Task < ApplicationRecord
-  belongs_to :category, as: :category_id
+  belongs_to :category
   has_many :users, through: :category
 
   validates :title, :description, :deadline, :category_id, presence: true
