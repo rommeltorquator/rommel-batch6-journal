@@ -12,19 +12,20 @@
 #  status      :integer          default("in_progress")
 #
 class Task < ApplicationRecord
-  enum status: { # do not forget to add default in the migration file
-    in_progress: 0,
-    completed: 1
-  }
-
   belongs_to :category
+  has_many :users, through: :categories
+
   validates :title, :description, :deadline, :category_id, presence: true
   validates :description, length: { minimum: 5, maximum: 35 }
   validate :not_past_date, on: :create
   validate :unique_task_per_category, on: [ :create, :create2 ]
 
   # has_many :users
-  has_many :users, through: :categories
+
+  enum status: { # do not forget to add default in the migration file
+    in_progress: 0,
+    completed: 1
+  }
 
   scope :in_progress, -> { where(status: "in_progress") }
   scope :completed, -> { where(status: "completed") }
