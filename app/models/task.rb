@@ -13,7 +13,7 @@
 #
 class Task < ApplicationRecord
   belongs_to :category
-  has_many :users, through: :categories
+  has_many :users, through: :category
 
   validates :title, :description, :deadline, :category_id, presence: true
   validates :description, length: { minimum: 5, maximum: 35 }
