@@ -1,27 +1,15 @@
-# == Schema Information
-#
-# Table name: tasks
-#
-#  id          :bigint           not null, primary key
-#  title       :string
-#  description :text
-#  deadline    :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  category_id :bigint           not null
-#  status      :integer          default("in_progress")
-#
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   title: MyString
   description: MyText
-  deadline: 2021-09-19 09:49:28
+  deadline: 2021-06-09 04:27:44
   category: one
-  status: in_progress
+  status: 1
 
 two:
-  title: MyString2
-  description: MyText2
-  deadline: 2021-09-19 09:49:28
-  category: one
-  status: in_progress
+  title: MyString
+  description: MyText
+  deadline: 2021-06-09 04:27:44
+  category: two
+  status: 1
