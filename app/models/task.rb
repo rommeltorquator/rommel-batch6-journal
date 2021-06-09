@@ -21,13 +21,13 @@ class Task < ApplicationRecord
 
   private
 
-  def not_past_date
-    return if deadline.nil? || deadline.today?
+  # def not_past_date
+  #   return if deadline.nil? || deadline.today?
 
-    if deadline.past?
-      return errors.add(:deadline, "must be valid")
-    end
-  end
+  #   if deadline.past?
+  #     return errors.add(:deadline, "must be valid")
+  #   end
+  # end
 
   def unique_task_per_category
     results = category.tasks.where(title: title)
