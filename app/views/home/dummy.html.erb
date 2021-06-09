@@ -5,3 +5,7 @@
 <%= @all_tasks %>
 <%= @category.title %>
 <%= @category.id %>
+
+<% @all_tasks.each do |a| %>
+    <p><%= a.id %></p>
+<% end %>
