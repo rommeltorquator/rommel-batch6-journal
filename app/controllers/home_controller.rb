@@ -9,7 +9,9 @@ class HomeController < ApplicationController
     # @completed_tasks = current_user.tasks.completed
     # @total_tasks = current_user.tasks
 
-    @current_logged_in = current_user.categories.count
+    @tasks = Task.all
+    @categories = Category.all
+    @users = User.all
 
     @tasks = current_user.tasks.in_progress.count
     @completed_tasks = current_user.tasks.completed.count
