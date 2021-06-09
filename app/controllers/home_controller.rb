@@ -5,9 +5,14 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    @tasks = current_user.tasks.in_progress
-    @completed_tasks = current_user.tasks.completed
-    @total_tasks = current_user.tasks
+    # @tasks = current_user.tasks.in_progress
+    # @completed_tasks = current_user.tasks.completed
+    # @total_tasks = current_user.tasks
+
+    @tasks = current_user.tasks.in_progress.count
+    @completed_tasks = current_user.tasks.completed.count
+    @total_tasks = current_user.tasks.count
+
     @overdue = current_user.tasks.less_than_today.in_progress
     # user.tasks.where("deadline < ?", date_today).where(status: "in_progress")
     
