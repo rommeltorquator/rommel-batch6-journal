@@ -17,5 +17,6 @@ class HomeController < ApplicationController
 
   def dummy
     @all_tasks = Task.all
+    @first_task = Task.first
   end
 end
