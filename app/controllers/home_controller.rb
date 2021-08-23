@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, only: [ :dashboard ]
-
+  
   def index
   end
 
@@ -9,8 +9,9 @@ class HomeController < ApplicationController
     @completed_tasks = current_user.tasks.completed
     @total_tasks = current_user.tasks
     @overdue = current_user.tasks.less_than_today.in_progress
-    
-    @today = DateTime.current.beginning_of_day.strftime("%-d %B %Y, %A")
+    @today = I18n.l(DateTime.current.beginning_of_day, format: '%-d %B %Y, %A')
     @page_title = "Welcome, #{current_user.first_name}"
   end
+
+  private
 end

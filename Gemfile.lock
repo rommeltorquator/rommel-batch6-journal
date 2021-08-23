@@ -236,6 +236,7 @@ DEPENDENCIES
   devise
   font-awesome-rails
   friendly_id (~> 5.4, >= 5.4.2)
+  i18n (~> 1.8, >= 1.8.10)
   jbuilder (~> 2.7)
   jquery-rails (~> 4.4)
   listen (~> 3.3)

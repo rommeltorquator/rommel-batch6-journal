@@ -1,0 +1,142 @@
+tl:
+  date:
+    day_names: [Linggo, Lunes, Martes, Miyerkules, Huwebes, Biyernes, Sabado]
+    abbr_day_names: [Lun, Mar, Mi, Hu, Bi, Sab, Li]
+
+    month_names: [~, Enero, Pebrero, Marso, Abril, Mayo, Hunyo, Hulyo, Agosto, Setyembre, Oktubre, Nobyembre, Disyembre]
+    abbr_month_names: [~, En, Peb, Mar, Ab, Ma, Hun, Hul, Ag, Set, Okt, Nob, dis]
+  
+  # attribute validation errors
+  errors:
+    format: "%{attribute} ay %{message}"
+    messages:
+      accepted: dapat na tanggapin
+      blank: hindi maaaring walang laman
+      confirmation: hindi tumutugma ang pagpapatunay
+      empty: hindi maaari na walang laman
+      equal_to: dapat na pantay sa %{count}
+      even: dapat ay pantay
+      exclusion: nakabukod na
+      greater_than: dapat na mas higit sa %{count}
+      greater_than_or_equal_to: dapat na mas higit sa o katumbas ng %{count}
+      inclusion: hindi kasama sa listahan
+      invalid: hindi tama
+      less_than: dapat na mas mababa sa %{count}
+      less_than_or_equal_to: dapat na mas mababa sa o katumbas ng %{count}
+      not_a_number: hindi isang numero
+      not_an_integer: dapat na isang pambuong
+      odd: dapat maging kakaiba
+      taken: ginagamit na
+      too_long:
+        one: masyadong mahaba (pinakamadami ay %{count} character)
+        other: masyadong mahaba (pinakamadami ay %{count} character)
+      too_short:
+        one: masyadong maikli (pinakakonti ay %{count} character)
+        other: masyadong maikli (pinakakonti ay %{count} character)
+      wrong_length:
+        one: ay maling haba (ito ay dapat eksaktong %{count} character)
+        other: ay maling haba (ito ay dapat eksaktong %{count} character)
+    template:
+      body: 'May mga problema sa mga sumusunod na patlang:'
+      header:
+        one: hindi maaaring mai-save ang %{model} na ito dahil sa isang error
+        other: hindi maaaring mai-save ang %{model} na ito dahil sa %{count} error
+
+  page_title: "Organize - Maging mahusay sa iyong oras"
+
+  navigation:
+    home: "Home"
+    sign_up: "Mag sign up"
+    sign_in: "Mag sign in"
+    dashboard: "Dashboard"
+    categories: "Mga kategorya"
+    sign_out: "Mag sign out"
+
+  home_page:
+    cta: "Mag sign-up na"
+    heading: "Iorganisa ang iyong buhay ng madali"
+    p_1: "Mas madali ang buhay kapag ikaw ay pagaling organisado. Ilang minuto lang para makagawa ng iyong account. Maging organisado!"
+
+    h2_headings:
+      first: "Makita ang progreso"
+      second: "Palaging nasa tamang landas"
+      third: "Magbigay kahulugan sa iyong buhay"
+
+    landing_page_p:
+      first: "Kung ikaw ay organisado, masarap ito sa pakiramdam, mas dumadali ang takbo ng ating buhay."
+      second: "Maging aware sa iyong progreso. Tutulungan ka ng Organized Journal App para ma-track ang iyong progreso."
+      third: "Madalas nating hindi napapahalagahan ang mga masasayang oras natin. Hindi na ngayon!. Maging masaya tayo"
+
+  dashboard:
+    new_category_btn: "+ Bagong kategorya"
+    welcome: "Kamusta"
+    hi: "Kamusta"
+    due_today: "Due ngayong araw"
+  
+  categories:
+    add_a_task: "+ Magdagdag ng gawain"
+  
+  table:
+    title: "Titulo"
+    task: "Gawain"
+    description: "Deskripsyon"
+    deadline: "Hangganan"
+    status: "Kalagayan"
+    category: "Kategorya"
+    task_status:
+      in_progress: "In progress"
+  
+  phrases:
+    you_have: "Meron kang"
+    out_of: "sa"
+    ongoing: "nagpapatuloy"
+    task: "na gawain"
+    tasks: "na mga gawain"
+    that: "na"
+    is: "ay"
+    are: "ay"
+    due_today: "due ay ngayon."
+    due: "due"
+    today: "ngayon"
+    completed: "nakumpleto"
+    total: "total - tagalog"
+    categories: "mga kategorya"
+    category: "kategorya"
+    overdue_tasks: "overdue na mga gawain."
+    pending_tasks_and: "nakabinbing gawain at"
+    no_pending_tasks_for_today: "Walang nakabinbing mga gawain para ngayong araw!"
+    add_a_category: "Magdagdag ng kategorya"
+    create_category: "Gumawa ng kategorya"
+
+    # categories index page
+    index_categories: "Kategorya"
+    add_a_task: "+ Magdagdag ng gawain"
+    delete: "Burahin"
+    completed_tasks: "Mga kumpletong gawain"
+    add_a_task_for: "Magdagdag ng gawain para"
+    create_task: "Bagong gawain"
+
+    # categories show page
+    created: "Nilikha"
+    capital_ongoing: "Kasalukuyan"
+    capital_completed: "Nakumpleto"
+    capital_tasks: "Mga gawain"
+    capital_task: "Gawain"
+    on_going_tasks: "Kasalukuyan na mga gawain"
+    add_task: "Magdagdag ng gawain"
+    edit: "Baguhin"
+    go_back: "Bumalik"
+    edit_task: "Edit taskkkk"
+    no_tasks: "Walang mga gawain"
+
+  # controller notice and alert messages
+  controllers:
+    categories:
+      added_category: "Isang kategorya ang naidagdag."
+      updated_category: "Isang kategorya ang na-update."
+      deleted_category: "Ang kategorya ay matagumpay na nabura."
+    
+    tasks:
+      added_task: "Isang gawain ang naidagdag."
+      updated_task: "Isang gawain ang na-update."
+      deleted_task: "Ang gawain ay matagumpay na nabura."

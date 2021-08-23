@@ -12,7 +12,7 @@
   </div>
 <% end %>
 
-<h1 class="<%= 'mt-4' if flash[:task_error].nil? %> text-center mb-4 dark-font display-4 font-weight-bold">Categories</h1>
+<h1 class="<%= 'mt-4' if flash[:task_error].nil? %> text-center mb-4 dark-font display-4 font-weight-bold"><%= t('phrases.index_categories') %></h1>
 
 <div class="bg-gray">
   <div class="container">
@@ -24,15 +24,15 @@
               <h4 class="card-title text-center"><%= link_to category.title, category_path(category), class: "category-link"  %></h4>
 
               <% if category.tasks.count > 0 %>
-                <p class="card-text text-center">Completed tasks: <%= category.tasks.where(status: 'completed').count %> of <%= category.tasks.count %></p>
+                <p class="card-text text-center"><%= t('phrases.completed_tasks') %>: <%= category.tasks.where(status: 'completed').count %> of <%= category.tasks.count %></p>
 
-                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">+ Add a task</button></p>
+                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>"><%= t('phrases.add_a_task') %></button></p>
               <% else %>
-                <p class="card-text text-center">No tasks</p>
-                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>">+ Add a task</button></p>
+                <p class="card-text text-center"><%= t('phrases.no_tasks') %></p>
+                <p class="card-text text-center"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable<%= category.id %>"><%= t('phrases.add_a_task') %></button></p>
               <% end %>
 
-              <p class="card-text text-center"><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" do %><i class="fa fa-trash"></i> Delete<% end %></p>
+              <p class="card-text text-center"><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" do %><i class="fa fa-trash"></i> <%= t('phrases.delete') %><% end %></p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle<%= category.id %>">Add a task for <%= category.title %></h5>
+                <h5 class="modal-title" id="exampleModalScrollableTitle<%= category.id %>"><%= t('phrases.add_a_task_for') %> <%= category.title %></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,7 +68,7 @@
                     <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
                   </div>
 
-                  <%= form.submit class: "btn btn-outline-success w-100" %>
+                  <%= form.submit t('phrases.create_task'), class: "btn btn-outline-success w-100" %>
                 <% end %>
               </div>
             </div>
@@ -78,7 +78,7 @@
       <% end %> <!-- categories loop -->
 
       <div class="col-sm-3 d-flex align-items-center mt-4">
-        <button type="button" class="btn btn-outline-light w-100" data-toggle="modal" data-target="#exampleModalScrollable">+ Create new category</button>
+        <button type="button" class="btn btn-outline-light w-100" data-toggle="modal" data-target="#exampleModalScrollable"><%= t('dashboard.new_category_btn') %></button>
       </div>
 
       <!-- create category Modal -->
@@ -87,7 +87,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title devise-headings" id="exampleModalScrollableTitle">Add a category</h4>
+              <h4 class="modal-title devise-headings" id="exampleModalScrollableTitle"><%= t('phrases.add_a_category') %></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -108,7 +108,7 @@
                   <%= form.text_field :title, class: "form-control" %>
                 </div>
 
-                <%= form.submit class: "btn btn-outline-success w-100" %>
+                <%= form.submit t('phrases.create_category'), class: "btn btn-outline-success w-100" %>
               <% end %>
             </div>
           </div>

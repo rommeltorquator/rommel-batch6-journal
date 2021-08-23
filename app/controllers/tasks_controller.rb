@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @task = @category.tasks.create(task_params)
 
     if @task.save
-      redirect_to categories_path, notice: "A task was successfully added."
+      redirect_to categories_path, notice: I18n.t('controllers.tasks.added_task')
     else
       flash[:task_error] = @task.errors.full_messages
 
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     @task = @category.tasks.create(task_params)
 
     if @task.save
-      redirect_to category_path(@category), notice: "A task was successfully added."
+      redirect_to category_path(@category), notice: I18n.t('controllers.tasks.added_task')
     else
       flash[:task_error] = @task.errors.full_messages
 
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
     @task = @category.tasks.find(params[:id])
 
     if @task.update(task_params) 
-      redirect_to category_path(@category), notice: "A task was successfully updated."
+      redirect_to category_path(@category), notice: I18n.t('controllers.tasks.updated_task')
     else
       flash[:task_error] = @task.errors.full_messages
       render 'categories/show/'
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to category_path(@category), notice: "A task was successfully deleted."
+    redirect_to category_path(@category), notice: I18n.t('controllers.tasks.deleted_task')
   end
 
   private

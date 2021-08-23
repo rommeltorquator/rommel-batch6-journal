@@ -1,33 +1,98 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  page_title: "Organize - Be efficient with your time"
+
+  navigation:
+    home: "Home"
+    sign_up: "Sign up"
+    sign_in: "Sign in"
+    dashboard: "Dashboard"
+    categories: "Categories"
+    sign_out: "Sign out"
+
+  home_page:
+    cta: "Sign up now"
+    heading: "Organize your life efforlessly"
+    p_1: "Life tends to be more easier when you are organized all the time. It only takes a few minutes to create an account. Be Organized!"
+
+    h2_headings:
+      first: "See your progress"
+      second: "Keeps you on-track"
+      third: "Give meaning to your life"
+    
+    landing_page_p:
+      first: "When you are organized, it makes you feel very good, life seems to become easier and happier."
+      second: "Be aware of your progress. Organized Journal App helps you track every tasks that are in-progress."
+      third: "We tend to overlook the happy moments with our loved-ones. Not no more! Be always happy."
+  
+  dashboard:
+    new_category_btn: "+ Create new category"
+    welcome: "Welcome"
+    hi: "Hi"
+    due_today: "Due today!"
+
+  categories:
+    add_a_task: "+ Add a task"
+
+  table:
+    title: "Title"
+    task: "Task"
+    description: "Description"
+    deadline: "Deadline"
+    status: "Status"
+    category: "Category"
+    task_status:
+      in_progress: "In progress"
+  
+  phrases:
+    you_have: "You have"
+    out_of: "out of"
+    ongoing: "ongoing"
+    task: "task"
+    tasks: "tasks"
+    that: "that"
+    is: "is"
+    are: "are"
+    due_today: "due today."
+    due: "due"
+    today: "today"
+    completed: "completed"
+    total: "total"
+    categories: "categories."
+    category: "category."
+    overdue_tasks: "overdue tasks."
+    pending_tasks_and: "pending tasks and"
+    no_pending_tasks_for_today: "No pending tasks for today!"
+    add_a_category: "Add a category"
+    create_category: "Create Category"
+
+    # categories index page
+    index_categories: "Categories"
+    add_a_task: "+ Add a task"
+    delete: "Delete"
+    completed_tasks: "Completed tasks"
+    add_a_task_for: "Add a task for"
+    create_task: "Create Task"
+
+    # categories show page
+    created: "Created"
+    capital_ongoing: "Ongoing"
+    capital_completed: "Completed"
+    capital_tasks: "Tasks"
+    capital_task: "Task"
+    on_going_tasks: "On-going Tasks"
+    add_task: "Add a task"
+    edit: "Edit"
+    go_back: "Go back"
+    edit_task: "Edit task"
+    no_tasks: "No tasks"
+
+  controllers:
+    categories:
+      added_category: "A category was successfully added."
+      updated_category: "A category was successfully updated."
+      deleted_category: "A category was successfully deleted."
+    
+    tasks:
+      added_task: "A task was successfully added."
+      updated_task: "A task was successfully updated."
+      deleted_task: "A task was successfully deleted."

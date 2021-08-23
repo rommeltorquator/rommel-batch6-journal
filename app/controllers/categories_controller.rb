@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(category_params)
 
     if @category.save
-      redirect_to categories_path, notice: "A category was successfully added."
+      redirect_to categories_path, notice: I18n.t('controllers.categories.added_category')
     else
       @categories = current_user.categories.order(created_at: :desc)
       flash[:task_error] = @category.errors.full_messages
@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
   def update
     title = @category.title
     if @category.update(category_params)
-      redirect_to @category, notice: "A category was successfully updated."
+      redirect_to @category, notice: I18n.t('controllers.categories.updated_category')
     else
       flash[:task_error] = @category.errors.full_messages
       @title = title
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_path, notice: "A category was successfully deleted."
+    redirect_to categories_path, notice: I18n.t('controllers.categories.deleted_category')
   end
 
   private

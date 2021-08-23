@@ -21,33 +21,33 @@
           <li class="nav-item">
             <% if request.path == dashboard_path %>
                 <%= link_to dashboard_path, class: "nav-link active" do %>
-                  Dashboard
+                  <%= t('navigation.dashboard') %>
                 <% end %>
             <% else %>
                 <%= link_to dashboard_path, class: "nav-link" do %>
-                  Dashboard
+                  <%= t('navigation.dashboard') %>
                 <% end %>
             <% end %>            
           </li>
           <li class="nav-item">
             <% if request.path == categories_path %>
                 <%= link_to categories_path, class: "nav-link active" do %>
-                  Categories
+                  <%= t('navigation.categories') %>
                 <% end %>
             <% else %>
                 <%= link_to categories_path, class: "nav-link" do %>
-                  Categories
+                  <%= t('navigation.categories') %>
                 <% end %>
             <% end %>
           </li>
           <li class="nav-item">
             <% if request.path == destroy_user_session_path %>
                 <%= link_to destroy_user_session_path, method: :delete, class: "nav-link active" do %>
-                  Sign out
+                  <%= t('navigation.sign_out') %>
                 <% end %>
             <% else %>
                 <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-                  <i class="fa fa-sign-out"></i> Sign out
+                  <i class="fa fa-sign-out"></i> <%= t('navigation.sign_out') %>
                 <% end %>
             <% end %>
           </li>
@@ -55,33 +55,33 @@
           <li class="nav-item">
             <% if request.path == root_path %>
                 <%= link_to root_path, class: "nav-link active" do %>
-                  Home
+                  <%= t('navigation.home') %>
                 <% end %>
             <% else %>
                 <%= link_to root_path, class: "nav-link" do %>
-                  Home
+                  <%= t('navigation.home') %>
                 <% end %>
             <% end %>   
           </li>
           <li class="nav-item">
             <% if request.path == new_user_registration_path %>
                 <%= link_to new_user_registration_path, class: "nav-link active" do %>
-                  Sign up
+                  <%= t('navigation.sign_up') %>
                 <% end %>
             <% else %>
                 <%= link_to new_user_registration_path, class: "nav-link" do %>
-                  Sign up
+                  <%= t('navigation.sign_up') %>
                 <% end %>
             <% end %>
           </li>
           <li class="nav-item">
             <% if request.path == new_user_session_path %>
                 <%= link_to new_user_session_path, class: "nav-link active" do %>
-                  <i class="fa fa-sign-in"></i> Sign in
+                  <i class="fa fa-sign-in"></i> <%= t('navigation.sign_in') %>
                 <% end %>
             <% else %>
                 <%= link_to new_user_session_path, class: "nav-link" do %>
-                  <i class="fa fa-sign-in"></i> Sign in
+                  <i class="fa fa-sign-in"></i> <%= t('navigation.sign_in') %>
                 <% end %>
             <% end %>   
           </li>          

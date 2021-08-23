@@ -19,5 +19,8 @@ module Journal
     # config.time_zone = "Central Time (US & Canada)"
     config.time_zone = "Asia/Taipei"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.i18n.available_locales = [:en, :tl]
+    config.i18n.default_locale = :en
   end
 end

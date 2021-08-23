@@ -18,7 +18,7 @@
   </button>
 </p>
 
-<p class="text-center category-p">Created: <%= @category.created_at.strftime("%B %-d, %Y") %> | Task<%= 's' if @category.tasks.count > 1 %>: <%= @category.tasks.count %> | Ongoing: <%= @category.tasks.in_progress.count %> | Completed: <%= @category.tasks.where(status: 'completed').count > 0 ? (((@category.tasks.where(status: 'completed').count).to_f / (@category.tasks.count).to_f) * 100).ceil : 0 %>%</p>
+<p class="text-center category-p"><%= t('phrases.created') %>: <%= I18n.l(@category.created_at, format: "%B %-d, %Y") %> | <%= @category.tasks.count > 1 ? t('phrases.capital_tasks') : t('phrases.capital_task') %>: <%= @category.tasks.count %> | <%= t('phrases.capital_ongoing') %>: <%= @category.tasks.in_progress.count %> | <%= t('phrases.capital_completed') %>: <%= @category.tasks.where(status: 'completed').count > 0 ? (((@category.tasks.where(status: 'completed').count).to_f / (@category.tasks.count).to_f) * 100).ceil : 0 %>%</p>
 
 <!-- category edit modal -->
 <div class="modal fade" id="exampleModalScrollable<%= @category.id %>" tabindex="-1" role="dialog"
@@ -26,7 +26,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle<%= @category.id %>">Edit <%= @category.title %></h5>
+        <h5 class="modal-title" id="exampleModalScrollableTitle<%= @category.id %>"><%= t('phrases.edit') %> <%= @category.title %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,8 +48,8 @@
 
 <p class="text-center show-options">
   <%= link_to categories_path, class: "edit-category" do %>
-    <i class="fa fa-arrow-left"></i> Go back
-  <% end %> | <%= link_to @category, method: :delete, data: { confirm: 'Are you sure?' }, class: "edit-category" do %><i class="fa fa-trash"></i> Delete<% end %>
+    <i class="fa fa-arrow-left"></i> <%= t('phrases.go_back') %>
+  <% end %> | <%= link_to @category, method: :delete, data: { confirm: 'Are you sure?' }, class: "edit-category" do %><i class="fa fa-trash"></i> <%= t('phrases.delete') %><% end %>
 </p>
 
 <% if @category.tasks.count > 0 %>
@@ -57,7 +57,7 @@
   <% if @category.tasks.in_progress.count > 0 %>
     <!-- heading -->
     <div class="bg-gray py-2">
-      <h4 class="text-center font-white">On-going Tasks</h4>
+      <h4 class="text-center font-white"><%= t('phrases.on_going_tasks') %></h4>
     </div>
 
     <!-- table -->
@@ -65,10 +65,10 @@
       <table class="table table-fixed">
         <thead>
           <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Deadline</th>
-            <th scope="col">Status</th>
+            <th scope="col"><%= t('table.title') %></th>
+            <th scope="col"><%= t('table.description') %></th>
+            <th scope="col"><%= t('table.deadline') %></th>
+            <th scope="col"><%= t('table.status') %></th>
             <th></th>
           </tr>
         </thead>
@@ -77,7 +77,8 @@
             <tr>
               <th scope="row"><%= c.title %></th>
               <td><%= c.description %></td>
-              <th scope="row"><span class="<%= 'text-danger' if c.deadline.beginning_of_day == DateTime.current.beginning_of_day %>"><%= c.deadline.beginning_of_day == DateTime.current.beginning_of_day ? "Due today!" : c.deadline.strftime("%B %-d, %Y") %></span></th>
+              <th scope="row"><span class="<%= 'text-danger' if c.deadline.beginning_of_day == DateTime.current.beginning_of_day %>"><%= c.deadline.beginning_of_day == DateTime.current.beginning_of_day ? "Due today!" : I18n.l(c.deadline, format: "%B %-d, %Y") %></span></th>
+              
               <th scope="row">
                 <% if c.status == 'completed' %>
                   <span class="text-success"><%= c.status.capitalize() %></span>
@@ -86,16 +87,16 @@
                 <% end %>
               </th>
               <td>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><i class="fa fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><i class="fa fa-edit"></i> <%= t('phrases.edit') %></button>
 
-                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %><i class="fa fa-trash"></i> Delete<% end %>
+                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %><i class="fa fa-trash"></i> <%= t('phrases.delete') %><% end %>
 
                 <!-- task edit Modal -->
                 <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
+                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>"><%= t('phrases.edit_task') %></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -120,7 +121,7 @@
                             <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
                           </div>
 
-                          <%= form.submit class: "btn btn-outline-success w-100" %>
+                          <%= form.submit t('phrases.edit'), class: "btn btn-outline-success w-100" %>
                         <% end %>
                       </div>
                     </div>
@@ -139,7 +140,7 @@
   <% if @category.tasks.completed.count > 0 %>
     <!-- heading -->
     <div class="bg-dark py-2">
-      <h4 class="text-center font-white">Completed</h4>
+      <h4 class="text-center font-white"><%= t('phrases.capital_completed') %></h4>
     </div>
 
     <!-- table -->
@@ -147,10 +148,10 @@
       <table class="table table-fixed">
         <thead>
           <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Deadline</th>
-            <th scope="col">Status</th>
+            <th scope="col"><%= t('table.title') %></th>
+            <th scope="col"><%= t('table.description') %></th>
+            <th scope="col"><%= t('table.deadline') %></th>
+            <th scope="col"><%= t('table.status') %></th>
             <th></th>
           </tr>
         </thead>
@@ -159,7 +160,7 @@
             <tr>
               <th scope="row"><%= c.title %></th>
               <td><%= c.description %></td>
-              <th scope="row"><%= c.deadline.strftime("%B %-d, %Y") %></th>
+              <th scope="row"><%= I18n.l(c.deadline, format: "%B %-d, %Y") %></th>  
               <th scope="row">
                 <% if c.status == 'completed' %>
                   <span class="text-success"><%= c.status.capitalize() %></span>
@@ -168,16 +169,16 @@
                 <% end %>
               </th>
               <td>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><i class="fa fa-edit"></i> Edit</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalScrollable3<%= c.id %>"><i class="fa fa-edit"></i> <%= t('phrases.edit') %></button>
 
-                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %><i class="fa fa-trash"></i> Delete<% end %>
+                <%= link_to task_path(c, :category_id => c.category_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" do %><i class="fa fa-trash"></i> <%= t('phrases.delete') %><% end %>
 
                 <!-- task edit Modal -->
                 <div class="modal fade" id="exampleModalScrollable3<%= c.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3<%= c.id %>" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>">Edit task</h5>
+                        <h5 class="modal-title" id="exampleModalScrollableTitle3<%= c.id %>"><%= t('phrases.edit_task') %></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -202,7 +203,7 @@
                             <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
                           </div>
 
-                          <%= form.submit class: "btn btn-outline-success w-100" %>
+                          <%= form.submit t('phrases.edit'), class: "btn btn-outline-success w-100" %>
                         <% end %>
                       </div>
                     </div>
@@ -218,7 +219,7 @@
   <% end %>
 
   <!-- add task button -->
-  <p class="card-text text-center mb-0"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable9">+ Add a task</button></p>
+  <p class="card-text text-center mb-0"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable9"><%= t('phrases.create_task') %></button></p>
 
   <!-- empty task -->
 <% else %>
@@ -226,7 +227,7 @@
     <div class="row">
       <div class="col-md-4 offset-md-4">
         <%= image_tag("Ice cream seller-cuate.png", :alt => "No tasks available", class: "w-100") %>
-        <p class="card-text text-center"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable9">+ Add a task</button></p>
+        <p class="card-text text-center"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalScrollable9"><%= t('phrases.create_task') %></button></p>
       </div>
     </div>
   </div>
@@ -238,7 +239,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle5">Add a task</h5>
+        <h5 class="modal-title" id="exampleModalScrollableTitle5"><%= t('phrases.add_task') %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -272,9 +273,11 @@
               <p><%= form.select :status, Task.statuses.keys, {}, { :class => 'form-control' } %></p>
             </div>
 
-            <%= form.submit class: "btn btn-outline-success w-100" %>
+            <%= form.submit t('phrases.create_task'), class: "btn btn-outline-success w-100" %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
+
+<br />
